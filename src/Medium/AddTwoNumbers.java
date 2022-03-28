@@ -7,4 +7,8 @@ public class AddTwoNumbers {
         
 		return l1;
     }
+	
+	public static void main(String[] args) {
+		
+	}
 }

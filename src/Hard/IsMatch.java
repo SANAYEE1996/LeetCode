@@ -3,32 +3,35 @@ package Hard;
 public class IsMatch {
 	public boolean isMatch(String s, String p) {
 		
-		if(s.equals(p) || s.equals(".*") || p.equals(".*")) {
+		String str = "";
+		
+		if(s.equals(p) || p.equals(".*")) {
 			return true;
 		}
 		else {
-			if(getIndex(s) != -1) {
-				
+			if(p.substring(p.length()-1).equals("*")) {
+				str = p.substring(0, p.length()-1);
+				if(repeat(str,s)) {
+					return true;
+				}
 			}
 			
-			if(getIndex(p) != -1) {
-				
-			}
 			return false;
 		}
     }
 	
-	public static int getIndex(String str) {
-		int flag = -1;
-		for(int i = 0; i < str.length(); i++) {
-			if(str.charAt(i) == '*') {
-				flag = i;
-				break;
-			}
+	public static boolean repeat(String str, String s) {
+		int count = s.length()/str.length();
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < count; i++) {
+			sb.append(str);
 		}
-		
-		
-		return flag;
+		if(sb.toString().equals(s)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static void main(String[] args) {
@@ -37,6 +40,7 @@ public class IsMatch {
 		System.out.println("the answer is : " +s.isMatch("aa", "a"));
 		System.out.println("the answer is : " +s.isMatch("aa", "a*"));
 		System.out.println("the answer is : " +s.isMatch("ab", ".*"));
+		System.out.println("the answer is : " +s.isMatch("aab", "c*a*b*"));
 
 	}
 

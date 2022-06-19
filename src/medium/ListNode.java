@@ -1,4 +1,4 @@
-package Medium;
+package medium;
 
 public class ListNode {
 	int val;

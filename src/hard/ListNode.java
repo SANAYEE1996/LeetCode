@@ -1,4 +1,4 @@
-package Hard;
+package hard;
 
 public class ListNode {
     int val;

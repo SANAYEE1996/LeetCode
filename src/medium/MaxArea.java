@@ -2,35 +2,25 @@ package medium;
 
 public class MaxArea {
 	public int maxArea(int[] height) {
-        int leftIndex = 0;
-        int rightIndex = height.length-1;
+        int left = 0;
+        int right = height.length-1;
+        int leftHeight = 0;
+        int rightHeight = 0;
+        int nowHeight = 0;
 		int maxValue = 0;
-		int value = 0;
 		
-		
-		for(int i = 0; i < height.length; i++) {
-			if(height[leftIndex] < height[rightIndex]) {
-				if (height[rightIndex] < height[rightIndex - i]) {
-					value  = (rightIndex - i - leftIndex) * height[rightIndex];
-					if(value > maxValue) {
-						maxValue = value;
-						rightIndex -= i;
-					}
-				}
+		while(left != right) {
+			rightHeight = height[right];
+			leftHeight = height[left];
+			nowHeight = Math.min(leftHeight , rightHeight);
+			maxValue = Math.max(maxValue, nowHeight*(right-left));
+			if(leftHeight <= rightHeight) {
+				left++;
 			}
-			else if(height[leftIndex] > height[rightIndex]) {
-				if (height[leftIndex] < height[leftIndex - i]) {
-					value  = (leftIndex - i - rightIndex) * height[leftIndex];
-					if(value > maxValue) {
-						maxValue = value;
-						leftIndex -= i;
-					}
-				}
-			}			
+			else {
+				right--;
+			}
 		}
-		
-		
-		
 		return maxValue;
     }
 }

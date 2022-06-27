@@ -2,46 +2,47 @@ package hard;
 
 public class IsMatch {
 	public boolean isMatch(String s, String p) {
+		if(isAllStar(p) || s.equals(p)) return true;
+		if(!p.contains("*") && (p.length() != s.length())) return false;
+		int[] sIndex = {0};
+		char nowChar = 0;
+		char imshi = 0;
 		
-		String str = "";
-		
-		if(s.equals(p) || p.equals(".*")) {
-			return true;
-		}
-		else {
-			if(p.substring(p.length()-1).equals("*")) {
-				str = p.substring(0, p.length()-1);
-				if(repeat(str,s)) {
-					return true;
-				}
+		for(int i = 0; i < p.length(); i++) {
+			nowChar = p.charAt(i);
+			if(nowChar == '?') {
+				sIndex[0] = (s.length()-1 > sIndex[0]) ? sIndex[0]++:sIndex[0];
 			}
-			
-			return false;
+			else if(nowChar == '*') {
+				i++;
+				if(i == p.length()) return true;
+				imshi = p.charAt(i);
+				if(!pass(s, imshi, sIndex)) return false;
+			}
+			else if(nowChar != s.charAt(sIndex[0]))	return false;
+			sIndex[0] = (s.length()-1 > sIndex[0]) ? sIndex[0]++:sIndex[0];
 		}
+		
+		return true;
     }
 	
-	public static boolean repeat(String str, String s) {
-		int count = s.length()/str.length();
-		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < count; i++) {
-			sb.append(str);
+	public boolean isAllStar(String p) {
+		for(int i = 0; i < p.length(); i++) {
+			if(p.charAt(i) != '*') {
+				return false;
+			}
 		}
-		if(sb.toString().equals(s)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return true;
 	}
-
-	public static void main(String[] args) {
-		IsMatch s = new IsMatch();
-		
-		System.out.println("the answer is : " +s.isMatch("aa", "a"));
-		System.out.println("the answer is : " +s.isMatch("aa", "a*"));
-		System.out.println("the answer is : " +s.isMatch("ab", ".*"));
-		System.out.println("the answer is : " +s.isMatch("aab", "c*a*b*"));
-
+	
+	public boolean pass(String s, char imshi, int[] sIndex) {
+		int start = sIndex[0];
+		for(int i = start; i < s.length(); i++) {
+			sIndex[0] = (s.length()-1 > sIndex[0]) ? sIndex[0]++:sIndex[0];
+			if(s.charAt(i) == imshi) {
+				return true;
+			}
+		}
+		return false;
 	}
-
 }

@@ -11,29 +11,37 @@ public class IsMatch {
 		for(int i = 0; i < p.length(); i++) {
 			nowChar = p.charAt(i);
 			if(nowChar == '?') {
-				sIndex = (sIndex + 1 <= s.length()-1) ? sIndex+1 : s.length()-1;
-				continue;
+				sIndex++;
 			}
 			else if(nowChar == '*') {
 				star = starString(p,i+1);
 				if(star.equals("")) return true;
 				i += star.length();
 				index = s.lastIndexOf(star);
-				if(index < 0) {
-					return false;
-				}
-				sIndex = (index + star.length() <= s.length()-1) ? index + star.length() : s.length()-1;
-				continue;
+				if(index < 0) return false;
+				sIndex = index + star.length();
 			}
 			else if(nowChar != s.charAt(sIndex)) {
 				return false;
 			}
-			sIndex = (sIndex + 1 <= s.length()-1) ? sIndex+1 : s.length()-1;
+			else if(nowChar == s.charAt(sIndex)) {
+				sIndex++;
+			}
+			
+			if(sIndex >= s.length()) {
+				p = p.substring(i+1);
+				break;
+			}
 		}
-		
-		return true;
+		if(isAllStar(p)) return true;
+		return false;
     }
-	
+	public boolean isAllStar(String p) {
+		for(int i = 0; i < p.length(); i++) {
+			if(p.charAt(i)!='*') return false;
+		}
+		return true;
+	}
 	
 	public String starString(String p, int i) {
 		int start = i;

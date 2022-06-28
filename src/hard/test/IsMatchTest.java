@@ -16,6 +16,8 @@ class IsMatchTest {
 		is = new IsMatch();
 	}
 	
+	
+	
 	@Test
 	void test() {
 		assertEquals(true, is.isMatch("abceb", "*a*b"));
@@ -23,6 +25,9 @@ class IsMatchTest {
 		assertEquals(false, is.isMatch("aa", "a"));
 		assertEquals(true, is.isMatch("aa", "a*"));
 		assertEquals(true, is.isMatch("", "***"));
+		assertEquals(true, is.isMatch("abcabczzzde", "*abc???de*"));
+		assertEquals(true, is.isMatch("abefcdgiescdfimde", "ab*cd?i*de"));
+		assertEquals(true, is.isMatch("acdcb", "a*c?b"));
 	}
 
 }

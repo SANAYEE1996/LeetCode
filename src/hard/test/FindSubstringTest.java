@@ -14,6 +14,10 @@ class FindSubstringTest {
 		fs = new FindSubstring();
 	}
 	
+	
+	
+	
+	
 	@Test
 	void test() {
 		System.out.println(fs.findSubstring("foobar", new String[] {"foo","bar"}));
@@ -22,6 +26,7 @@ class FindSubstringTest {
 		System.out.println(fs.findSubstring("barfoofoobarthefoobarman", new String[] {"bar","foo","the"}));
 		System.out.println(fs.findSubstring("", new String[] {""}));
 		System.out.println(fs.findSubstring("wordgoodgoodgoodbestword", new String[] {"word","good","best","good"}));
+		System.out.println(fs.findSubstring("ababaab", new String[] {"ab","ba","ba"}));
 	}
 
 }

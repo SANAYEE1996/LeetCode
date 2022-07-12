@@ -13,19 +13,26 @@ public class FindSubstring {
 		if(maxCount < 0) return list;
 		for(String str : words) wordsList.add(str);
 		for(int i = 0; i <= maxCount; i++) {
-			if(isContains(wordsList, s.substring(i, i+wordAllLength))) list.add(i);
+			if(isContains(new ArrayList<String>(wordsList), s.substring(i, i+wordAllLength), wordLength)) list.add(i);
 		}
 		System.out.println(list);
     
 		return list;
     }
 	
-	public boolean isContains(ArrayList<String> wordsList, String allWord) {
-		for(String s : wordsList) {
-			if(!allWord.contains(s)) return false;
-			allWord = allWord.replaceFirst(s, "");
+	public boolean isContains(ArrayList<String> wordsList, String allWord, int wordLength) {
+		String containWord = "";
+		while(wordsList.size() > 0) {
+			containWord = allWord.substring(0, wordLength);
+			if(wordsList.contains(containWord)) 
+				wordsList.remove(wordsList.indexOf(containWord));
+			else
+				break;
+			allWord = (allWord.length() >= wordLength) ? allWord.substring(wordLength) : "";
 		}
-		return true;
+		
+		if(wordsList.size() == 0) return true;
+		return false;
 	}
 	
 	

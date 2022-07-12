@@ -5,31 +5,28 @@ import java.util.List;
 
 public class FindSubstring {
 	public List<Integer> findSubstring(String s, String[] words) {
+		List<Integer> list = new ArrayList<>();
 		ArrayList<String> wordsList = new ArrayList<>();
-		ArrayList<String> copyList = new ArrayList<>();
+		int wordLength = words[0].length();
+		int wordAllLength = wordLength*words.length;
+		int maxCount = s.length() - wordAllLength;
+		if(maxCount < 0) return list;
 		for(String str : words) wordsList.add(str);
-		String before = "";
-		String after = "";
-		int startIndex = 0;
-		for(int i = 0; i < s.length(); i++) {
-			for(int j = 0; j < wordsList.size(); j++) {
-				after = wordsList.get(j);
-				before = s.substring(i,i+after.length());
-				if(after.equals(before)) {
-					startIndex = i+after.length();
-					copyList.addAll(wordsList);
-					copyList.remove(j);
-					
-					copyList.clear();
-					break;
-				}
-			}
+		for(int i = 0; i <= maxCount; i++) {
+			if(isContains(wordsList, s.substring(i, i+wordAllLength))) list.add(i);
 		}
-		
-		
-		
-		
-        List<Integer> list = new ArrayList<>();
+		System.out.println(list);
+    
 		return list;
     }
+	
+	public boolean isContains(ArrayList<String> wordsList, String allWord) {
+		for(String s : wordsList) {
+			if(!allWord.contains(s)) return false;
+			allWord = allWord.replaceFirst(s, "");
+		}
+		return true;
+	}
+	
+	
 }

@@ -39,7 +39,6 @@ public class ThreeSum {
     }
 	
 	void twoMinusOnePlus(ArrayList<Integer> minusIndex, ArrayList<Integer> plusIndex, List<List<Integer>> list, int[] nums) {
-		System.out.println("two minus one plus");
 		int count = Math.max(minusIndex.size(), plusIndex.size());
 		int minus = 0;
 		int plus = 0;
@@ -48,30 +47,27 @@ public class ThreeSum {
 		int pIndex = plusIndex.get(plusIndex.size()-1);
 		int pMinIndex = plusIndex.get(0);
 		while(count > 0) {
-			System.out.println("minus Index : " +mIndex + " // plusIndex : " +pIndex);
-			minus = nums[mIndex] + nums[mIndex+1];
+			minus = Math.abs(nums[mIndex] + nums[mIndex+1]);
 			plus = nums[pIndex];
-			System.out.println("minus Value : " +minus+ " // plus Value : " + plus);
-			if(Math.abs(minus) == plus) {
+			if(minus == plus) {
 				list.add(new ArrayList<Integer>());
 				list.get(list.size()-1).add(nums[mIndex]);
 				list.get(list.size()-1).add(nums[mIndex+1]);
 				list.get(list.size()-1).add(plus);
-				mIndex = (mIndex < mMaxIndex-1) ? mIndex++:mIndex;
-				pIndex = (pIndex > pMinIndex) ? pIndex--:pIndex;
+				mIndex = (mIndex < mMaxIndex-1) ? mIndex+1:mIndex;
+				pIndex = (pIndex > pMinIndex) ? pIndex-1:pIndex;
 			}
-			else if(Math.abs(minus) > plus) {
-				mIndex = (mIndex < mMaxIndex-1) ? mIndex++:mIndex;
+			else if(minus > plus) {
+				mIndex = (mIndex < mMaxIndex-1) ? mIndex+1:mIndex;
 			}
-			else {
-				pIndex = (pIndex > pMinIndex) ? pIndex--:pIndex;
+			else{
+				pIndex = (pIndex > pMinIndex) ? pIndex-1:pIndex;
 			}
 			count--;
 		}
 	}
 	
 	void oneMinusTwoPlus(ArrayList<Integer> minusIndex, ArrayList<Integer> plusIndex, List<List<Integer>> list, int[] nums) {
-		System.out.println("one minus two plus");
 		int minusCount = minusIndex.size();
 		int plusCount = plusIndex.size();
 		int count = Math.max(minusCount, plusCount);
@@ -84,19 +80,19 @@ public class ThreeSum {
 		while(count > 0) {
 			minus = nums[mIndex];
 			plus = nums[pIndex] + nums[pIndex-1];
-			if(Math.abs(minus) == plus) {
+			if(minus == plus) {
 				list.add(new ArrayList<Integer>());
 				list.get(list.size()-1).add(minus);
 				list.get(list.size()-1).add(nums[pIndex-1]);
 				list.get(list.size()-1).add(nums[pIndex]);
-				mIndex = (mIndex < mMaxIndex) ? mIndex++:mIndex;
-				pIndex = (pIndex > pMinIndex+1) ? pIndex--:pIndex;
+				mIndex = (mIndex < mMaxIndex) ? mIndex+1:mIndex;
+				pIndex = (pIndex > pMinIndex+1) ? pIndex-1:pIndex;
 			}
-			else if(Math.abs(minus) > plus) {
-				mIndex = (mIndex < mMaxIndex) ? mIndex++:mIndex;
+			else if(minus > plus) {
+				mIndex = (mIndex < mMaxIndex) ? mIndex+1:mIndex;
 			}
 			else {
-				pIndex = (pIndex > pMinIndex+1) ? pIndex--:pIndex;
+				pIndex = (pIndex > pMinIndex+1) ? pIndex-1:pIndex;
 			}
 			count--;
 		}
@@ -115,21 +111,21 @@ public class ThreeSum {
 		int pIndex = plusIndex.get(plusIndex.size()-1);
 		int pMinIndex = plusIndex.get(0);
 		while(count > 0) {
-			minus = nums[mIndex];
+			minus = Math.abs(nums[mIndex]);
 			plus = nums[pIndex];
-			if(Math.abs(minus) == plus) {
+			if(minus == plus) {
 				list.add(new ArrayList<Integer>());
 				list.get(list.size()-1).add(minus);
 				list.get(list.size()-1).add(0);
 				list.get(list.size()-1).add(plus);
-				mIndex = (mIndex < mMaxIndex) ? mIndex++:mIndex;
-				pIndex = (pIndex > pMinIndex) ? pIndex--:pIndex;
+				mIndex = (mIndex < mMaxIndex) ? mIndex+1:mIndex;
+				pIndex = (pIndex > pMinIndex) ? pIndex-1:pIndex;
 			}
-			else if(Math.abs(minus) > plus) {
-				mIndex = (mIndex < mMaxIndex) ? mIndex++:mIndex;
+			else if(minus > plus) {
+				mIndex = (mIndex < mMaxIndex) ? mIndex+1:mIndex;
 			}
 			else {
-				pIndex = (pIndex > pMinIndex) ? pIndex--:pIndex;
+				pIndex = (pIndex > pMinIndex) ? pIndex-1:pIndex;
 			}
 			count--;
 		}

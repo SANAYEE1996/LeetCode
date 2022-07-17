@@ -22,24 +22,27 @@ public class GetPermutation {
 	}
 	
 	public String getPermutation(int n, int k) {
+		System.out.println("=================================");
+		System.out.print("length : "+ n + " rank : " + k + " answer : \n");
 		ArrayList<String> list = new ArrayList<>();
 		for(int i = 0; i < n; i++) list.add(configArray[i]);
 		int[] permutateArray = getPermutateArray(n);
 		int nam = 0;
-		System.out.println(k);
 		StringBuilder sb = new StringBuilder();
+		
 		for(int i : permutateArray) {
+			System.out.println("나누는 수  : " +i);
 			nam = k%i;
 			k /= i;
 			System.out.println("몫 : "+k + " // 나머지 : " +nam);
-			if(k >= 0 && list.size() > 0) {
-				sb.append(list.get(k));
-				list.remove(k);
+			if(k > 0 && k < list.size()+1 && list.size() > 0) {
+				sb.append(list.get(k-1));
+				list.remove(k-1);
 			}
 			System.out.println(sb.toString() + " 남은 리스트 : " + list);
 			k = nam;
 		}
-		
+		System.out.println(sb.toString() + " 남은 리스트 : " + list);
 		return "";
     }
 }

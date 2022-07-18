@@ -2,8 +2,6 @@ package hard.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,23 +19,18 @@ class GetPermutationTest {
 
 	@Test
 	void test() {
-		System.out.println(Arrays.toString(gp.getPermutateArray(3)));
-		assertEquals("",gp.getPermutation(3, 1));
-		assertEquals("",gp.getPermutation(3, 2));
-		assertEquals("",gp.getPermutation(3, 3));
-		assertEquals("",gp.getPermutation(3, 4));
-		assertEquals("",gp.getPermutation(3, 5));
-		assertEquals("",gp.getPermutation(3, 6));
-		assertEquals("",gp.getPermutation(4, 1));
-		assertEquals("",gp.getPermutation(4, 2));
-		assertEquals("",gp.getPermutation(4, 3));
-		assertEquals("",gp.getPermutation(4, 4));
-		assertEquals("",gp.getPermutation(4, 5));
-		assertEquals("",gp.getPermutation(4, 6));
-		assertEquals("",gp.getPermutation(4, 9));
-		assertEquals("",gp.getPermutation(4, 13));
-		assertEquals("",gp.getPermutation(4, 14));
-		assertEquals("",gp.getPermutation(4, 24));
+		assertEquals("123",gp.getPermutation(3, 1));
+		assertEquals("132",gp.getPermutation(3, 2));
+		assertEquals("213",gp.getPermutation(3, 3));
+		assertEquals("231",gp.getPermutation(3, 4));
+		assertEquals("312",gp.getPermutation(3, 5));
+		assertEquals("321",gp.getPermutation(3, 6));
+		assertEquals("1234",gp.getPermutation(4, 1));
+		assertEquals("1243",gp.getPermutation(4, 2));
+		assertEquals("1324",gp.getPermutation(4, 3));
+		assertEquals("1342",gp.getPermutation(4, 4));
+		assertEquals("1423",gp.getPermutation(4, 5));
+		assertEquals("1432",gp.getPermutation(4, 6));
 	}
 
 }

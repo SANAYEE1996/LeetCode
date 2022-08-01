@@ -5,6 +5,7 @@ import java.util.List;
 
 public class LadderLength {
 	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+		System.out.println("리스트 사이즈 : "+wordList.size());
 		int[] minArray = new int[1];
 		minArray[0] = Integer.MAX_VALUE;
 		gogo(beginWord, endWord, wordList, minArray, 1);

@@ -1,11 +1,14 @@
 package hard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LadderLength {
 	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-		System.out.println("리스트 사이즈 : "+wordList.size());
+		System.out.println("원래 리스트 : "+wordList);
+		Collections.sort(wordList, (o1, o2) -> (differCount(o1,o2) == 1) ? 0 : -1);
+		System.out.println("정렬한 리스트 : "+wordList);
 		int[] minArray = new int[1];
 		minArray[0] = Integer.MAX_VALUE;
 		gogo(beginWord, endWord, wordList, minArray, 1);
@@ -33,6 +36,7 @@ public class LadderLength {
 			if(a.charAt(i) != b.charAt(i)) {
 				count++;
 			}
+			if(count > 1) break;
 		}
 		return count;
 	}

@@ -32,7 +32,7 @@ class IntegerationTest {
 		System.out.println(candy.candy(new int[] {1,0,2}));
 		System.out.println(ladderLength.ladderLength("hit", "cog", inputList));
 		System.out.println(ladderLength.ladderLength("hit", "cog", inputList2));
-		//System.out.println(ladderLength.ladderLength("qa", "sq", inputList3));
+		System.out.println(ladderLength.ladderLength("qa", "sq", inputList3));
 	}
 
 }

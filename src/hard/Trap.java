@@ -7,14 +7,25 @@ public class Trap {
 	 * 
 	 * */
 	public int trap(int[] height) {
-		int backTop = 0;
+		int count = 0;
+		int sumArea = 0;
+		int examSum = 0;
 		for(int i = 0; i < height.length; i++) {
-			if(backTop < height[i]) backTop = height[i];
-			System.out.println( "나의 인덱스 : "+i+
-								" // 나의 값 : "+height[i]+
-								" // 큰 놈 : " +backTop);
+			examSum = 0;
+			for(int j = i+1; j < height.length; j++) {
+				count = j;
+				if(height[i] <= height[j]) 
+					break;
+				examSum += (height[i]-height[j]);
+				if(j == height.length-1)
+					examSum = 0;
+				System.out.println(examSum);
+			}
+			i = count;
+			System.out.println("i value : " +i +" exam Sum : " +examSum);
+			sumArea += examSum;
 		}
 		
-		return 0;
+		return sumArea;
     }
 }

@@ -1,6 +1,8 @@
 package hard.test;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +43,24 @@ class IntegerationTest {
 	@Test
 	void testCase02() {
 		int[] exam = {0,1,0,2,1,0,1,3,2,1,2,1};
-		System.out.println("비 가둔 넓이 : "+trap.trap(exam));
+		assertEquals(6,trap.trap(exam));
+	}
+	
+	@Test
+	void testCase03() {
+		int[] exam = {9,8,7,6,5,4};
+		assertEquals(0,trap.trap(exam));
+	}
+	
+	@Test
+	void testCase04() {
+		int[] exam = new int[20000];
+		int value = 20000;
+		for(int i = 0; i < exam.length; i++) {
+			exam[i] = value;
+			value--;
+		}
+		assertEquals(0,trap.trap(exam));
 	}
 
 }

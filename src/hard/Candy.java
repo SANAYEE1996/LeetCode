@@ -13,15 +13,18 @@ public class Candy {
         }
         candyCountArray[0] = (candyCountArray[0] > candyCountArray[1]) ? 2 : 1;
         for(int i = 1; i < ratings.length-1; i++){
-            if(ratings[i-1] < ratings[i] && ratings[i] > ratings[i+1]) {
-            	candyCountArray[i] = Math.max(candyCountArray[i-1], candyCountArray[i+1]) +1;
-            }
-            if(ratings[i-1] < ratings[i] && ratings[i] <= ratings[i+1]) {
+        	if(ratings[i-1] < ratings[i] && ratings[i] <= ratings[i+1]) {
             	candyCountArray[i] = candyCountArray[i-1] +1;
             	candyCountArray[i+1] = (candyCountArray[i+1] < candyCountArray[i]) ? candyCountArray[i]+1 : candyCountArray[i+1];
             }
-            if(ratings[i-1] >= ratings[i] && ratings[i] > ratings[i+1]) {
+            if(ratings[i-1] < ratings[i] && ratings[i] > ratings[i+1]) {
+            	candyCountArray[i] = Math.max(candyCountArray[i-1], candyCountArray[i+1]) +1;
+            }
+            if(ratings[i-1] > ratings[i] && ratings[i] > ratings[i+1]) {
             	candyCountArray[i] = candyCountArray[i+1] +1;
+            	candyCountArray[i-1] = (candyCountArray[i-1] <= candyCountArray[i]) ? candyCountArray[i]+1 : candyCountArray[i-1];
+            }
+            if(ratings[i-1] >= ratings[i] && ratings[i] < ratings[i+1]) {
             	candyCountArray[i-1] = (candyCountArray[i-1] < candyCountArray[i]) ? candyCountArray[i]+1 : candyCountArray[i-1];
             }
         }

@@ -61,13 +61,30 @@ class IntegerationTest {
 		}
 		assertEquals(0,trap.trap(exam));
 	}
-	
+	/*
+	 * 1,3,2,2,1
+	 * 1 1 1 1 1
+	 * 1 2 1 1 1
+	 * 1 2 1 2 1
+	 * 
+	 * 1,6,9,8,7,3,2
+	 * 1 1 1 1 1 1 1
+	 * 1 2 3 1 1 1 1
+	 * 1 2 3 1 1 1 1
+	 * 1 1 3 2 1 1 1
+	 * 1 1 4 3 2 1 1
+	 * 1 1 
+	 * */
 	@Test
 	void candyTest01() {
 		System.out.println(candy.candy(new int[] {1,0,2}));
 		System.out.println(candy.candy(new int[] {1,2,2}));
 		System.out.println(candy.candy(new int[] {1,2,87,87,87,2,1}));
 		System.out.println(candy.candy(new int[] {1,3,4,5,2}));
+		System.out.println(candy.candy(new int[] {1,3,2,2,1}));
+		System.out.println(candy.candy(new int[] {1,6,10,8,7,3,2}));
+		System.out.println(candy.candy(new int[] {9,8,7,6,5}));
+		System.out.println(candy.candy(new int[] {9}));
 	}
 
 }

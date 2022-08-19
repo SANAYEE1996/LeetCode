@@ -7,19 +7,12 @@ public class Candy {
 	public int candy(int[] ratings) {
         int answer = 0;
         int[] candyCountArray = new int[ratings.length];
-        int lastIndex = candyCountArray.length-1;
         for(int i = 0; i < candyCountArray.length; i++) {
         	candyCountArray[i] = 1;
         }
-        candyCountArray[0] = (candyCountArray[0] > candyCountArray[1]) ? 2 : 1;
-        for(int i = 1; i < ratings.length-1; i++){
-        	reArrayIandJ(i-1, i, i+1, ratings, candyCountArray);
+        if(ratings.length > 1) {
+        	executeFunction(candyCountArray, ratings);
         }
-        candyCountArray[lastIndex] = (candyCountArray[lastIndex] > candyCountArray[lastIndex-1]) ? candyCountArray[lastIndex-1]+1 : 1;
-        for(int i = ratings.length-2; i > 0; i--){
-        	reArrayIandJ(i-1, i, i+1, ratings, candyCountArray);
-        }
-        candyCountArray[0] = (ratings[0] > ratings[1] && candyCountArray[0] <= candyCountArray[1]) ? candyCountArray[1]+1 : candyCountArray[0];
         for(int i : candyCountArray) {
         	answer += i;
         }
@@ -27,6 +20,20 @@ public class Candy {
         System.out.println("사탕 받은 결과 배열 : "+Arrays.toString(candyCountArray));
         return answer;
     }
+	
+	void executeFunction(int[] candyCountArray, int[] ratings) {
+		int lastIndex = candyCountArray.length-1;
+		candyCountArray[0] = (ratings[0] > ratings[1]) ? 2 : 1;
+        for(int i = 1; i < ratings.length-1; i++){
+        	reArrayIandJ(i-1, i, i+1, ratings, candyCountArray);
+        }
+        candyCountArray[lastIndex] = 
+        (ratings[lastIndex] > ratings[lastIndex-1] && candyCountArray[lastIndex] <= candyCountArray[lastIndex-1]) ? candyCountArray[lastIndex-1]+1 : 1;
+        for(int i = ratings.length-2; i > 0; i--){
+        	reArrayIandJ(i-1, i, i+1, ratings, candyCountArray);
+        }
+        candyCountArray[0] = (ratings[0] > ratings[1] && candyCountArray[0] <= candyCountArray[1]) ? candyCountArray[1]+1 : candyCountArray[0];
+	}
 	
 	void reArrayIandJ(int i, int j, int k, int[] ratings, int[] candyCountArray) {
 		if(ratings[i] < ratings[j]) {

@@ -85,6 +85,7 @@ class IntegerationTest {
 		System.out.println(candy.candy(new int[] {1,6,10,8,7,3,2}));
 		System.out.println(candy.candy(new int[] {9,8,7,6,5}));
 		System.out.println(candy.candy(new int[] {9}));
+		System.out.println(candy.candy(new int[] {1,2}));
 	}
 
 }

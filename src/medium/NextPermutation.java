@@ -1,8 +1,6 @@
 package medium;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class NextPermutation {
 	public void nextPermutation(int[] nums) {
@@ -30,25 +28,21 @@ public class NextPermutation {
 		return true;
 	}
 	
-	void reArray(int[] exam,int[] nums, int index) {
-		ArrayList<Integer> examList = new ArrayList<>();
-		for(int i : exam) {
-			examList.add(i);
-		}
+	void reArray(int[] exam, int[] nums, int index) {
+		int exceptIndex = 0;
 		int firstValue = exam[0];
-		Collections.sort(examList);
 		Arrays.sort(exam);
 		for(int i = 0; i< exam.length; i++) {
 			if(exam[i] > firstValue) {
+				exceptIndex = i;
 				firstValue = exam[i];
-				examList.remove(i);
 				break;
 			}
 		}
-		examList.add(0, firstValue);
+		nums[index] = firstValue;
 		int j = 0;
-		for(int i = index; i < nums.length; i++) {
-			nums[i] = examList.get(j);
+		for(int i = index+1; i < nums.length; i++) {
+			nums[i] = (j != exceptIndex) ? exam[j] : exam[++j];
 			j++;
 		}
 	}

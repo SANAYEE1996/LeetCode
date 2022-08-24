@@ -13,19 +13,21 @@ import org.junit.jupiter.api.Test;
 import hard.Candy;
 import hard.LadderLength;
 import hard.Trap;
+import hard.WordBreak;
 
 class IntegerationTest {
 	
 	private Candy candy;
 	private LadderLength ladderLength;
 	private Trap trap;
-	
+	private WordBreak wordbreak;
 	
 	@BeforeEach
 	public void setup() {
 		candy = new Candy();
 		ladderLength = new LadderLength();
 		trap = new Trap();
+		wordbreak = new WordBreak();
 	}
 	
 	@Test
@@ -87,5 +89,11 @@ class IntegerationTest {
 		System.out.println(candy.candy(new int[] {9}));
 		System.out.println(candy.candy(new int[] {1,2}));
 	}
-
+	
+	
+	@Test
+	void wordBreakTest01() {
+		System.out.println(wordbreak.wordBreak("catsanddog", new ArrayList<String>(Arrays.asList(new String[] {"cat","cats","and","sand","dog"}))));
+		System.out.println(wordbreak.wordBreak("pineapplepenapple", new ArrayList<String>(Arrays.asList(new String[] {"apple","pen","applepen","pine","pineapple"}))));
+	}
 }

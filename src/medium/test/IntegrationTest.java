@@ -9,17 +9,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import medium.NextPermutation;
+import medium.UniquePaths;
 import medium.WordBreak;
 
 class IntegrationTest {
 	
 	private NextPermutation np;
 	private WordBreak wordbreak;
+	private UniquePaths up;
 	
 	@BeforeEach
 	public void setup() {
 		np = new NextPermutation();
 		wordbreak = new WordBreak();
+		up = new UniquePaths();
 	}
 	
 	@Test
@@ -65,6 +68,14 @@ class IntegrationTest {
 		charList.add('e');
 		charList.add('g');
 		System.out.println("이진 탐색 : " +wordbreak.getStartIndex(charList, 'f'));
+	}
+	
+	@Test
+	void testUniquePath() {
+		assertEquals(1, up.uniquePaths(1, 1));
+		assertEquals(28, up.uniquePaths(3, 7));
+		System.out.println("제일 큰 수 : " +up.uniquePaths(10, 10));
+		System.out.println("제일 큰 수 : " +up.uniquePaths(100, 100));
 	}
 
 }

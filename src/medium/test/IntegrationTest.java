@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import medium.MultiplyWithNoUseLibrary;
 import medium.NextPermutation;
 import medium.UniquePaths;
 import medium.WordBreak;
@@ -17,12 +18,14 @@ class IntegrationTest {
 	private NextPermutation np;
 	private WordBreak wordbreak;
 	private UniquePaths up;
+	private MultiplyWithNoUseLibrary multiple;
 	
 	@BeforeEach
 	public void setup() {
 		np = new NextPermutation();
 		wordbreak = new WordBreak();
 		up = new UniquePaths();
+		multiple = new MultiplyWithNoUseLibrary();
 	}
 	
 	@Test
@@ -76,6 +79,16 @@ class IntegrationTest {
 		assertEquals(28, up.uniquePaths(3, 7));
 		System.out.println("제일 큰 수 : " +up.uniquePaths(10, 10));
 		System.out.println("제일 큰 수 : " +up.uniquePaths(100, 100));
+	}
+	
+	@Test
+	void testMultiply() {
+		System.out.println("곱하기 테스트 입니다~~");
+		System.out.println(multiple.multiply("123", "456"));
+		System.out.println(multiple.multiply("433", "7456"));
+		System.out.println(multiple.multiply("99999", "99999"));
+		System.out.println(multiple.multiply("999999999", "0"));
+		System.out.println(multiple.multiply("999999999", "1"));
 	}
 
 }

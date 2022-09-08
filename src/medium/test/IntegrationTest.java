@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import medium.JumpGame;
 import medium.MultiplyWithNoUseLibrary;
 import medium.NextPermutation;
 import medium.UniquePaths;
@@ -19,6 +20,7 @@ class IntegrationTest {
 	private WordBreak wordbreak;
 	private UniquePaths up;
 	private MultiplyWithNoUseLibrary multiple;
+	private JumpGame jumpgame;
 	
 	@BeforeEach
 	public void setup() {
@@ -26,6 +28,7 @@ class IntegrationTest {
 		wordbreak = new WordBreak();
 		up = new UniquePaths();
 		multiple = new MultiplyWithNoUseLibrary();
+		jumpgame = new JumpGame();
 	}
 	
 	@Test
@@ -89,6 +92,13 @@ class IntegrationTest {
 		System.out.println(multiple.multiply("99999", "99999"));
 		System.out.println(multiple.multiply("999999999", "0"));
 		System.out.println(multiple.multiply("999999999", "1"));
+	}
+	
+	@Test
+	void jumpGameTest() {
+		System.out.println("점프 게임 테스트 입니다~~");
+		System.out.println(jumpgame.canJump(new int[] {2,3,1,1,4}));
+		System.out.println(jumpgame.canJump(new int[] {3,2,1,0,4}));
 	}
 
 }

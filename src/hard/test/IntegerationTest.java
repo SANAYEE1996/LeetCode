@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import hard.Candy;
+import hard.CodingStudy;
 import hard.LadderLength;
 import hard.Trap;
 import hard.WordBreak;
@@ -21,6 +22,7 @@ class IntegerationTest {
 	private LadderLength ladderLength;
 	private Trap trap;
 	private WordBreak wordbreak;
+	private CodingStudy codingstudy;
 	
 	@BeforeEach
 	public void setup() {
@@ -28,6 +30,7 @@ class IntegerationTest {
 		ladderLength = new LadderLength();
 		trap = new Trap();
 		wordbreak = new WordBreak();
+		codingstudy = new CodingStudy();
 	}
 	
 	@Test
@@ -95,5 +98,14 @@ class IntegerationTest {
 	void wordBreakTest01() {
 		System.out.println(wordbreak.wordBreak("catsanddog", new ArrayList<String>(Arrays.asList(new String[] {"cat","cats","and","sand","dog"}))));
 		System.out.println(wordbreak.wordBreak("pineapplepenapple", new ArrayList<String>(Arrays.asList(new String[] {"apple","pen","applepen","pine","pineapple"}))));
+	}
+	
+	@Test
+	void codingStudyTest() {
+		System.out.println("코딩 공부 테스트!");
+		System.out.println(codingstudy.solution(10, 10, new int[][] {{10,15,2,1,2},{20,20,3,3,4}}));
+		System.out.println(codingstudy.solution(0, 0, new int[][] {{0,0,2,1,2},{4,5,3,1,2},{4,11,4,0,2},{10,4,0,4,2}}));
+//		assertEquals(15, codingstudy.solution(10, 10, new int[][] {{10,15,2,1,2},{20,20,3,3,4}}));
+//		assertEquals(13, codingstudy.solution(0, 0, new int[][] {{0,0,2,1,2},{4,5,3,1,2},{4,11,4,0,2},{10,4,0,4,2}}));
 	}
 }

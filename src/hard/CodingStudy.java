@@ -1,6 +1,7 @@
 package hard;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
  * 
@@ -21,7 +22,17 @@ public class CodingStudy {
         	}
         	impossibleList.add(i);
         }
-        
+        System.out.println("가능한 리스트");
+        print(possibleList);
+        System.out.println("불 가능한 리스트");
+        print(impossibleList);
         return answer;
     }
+	
+	void print(ArrayList<int[]> list) {
+		for(int i = 0; i < list.size(); i++) {
+			System.out.print(Arrays.toString(list.get(i))+ " ");
+		}
+		System.out.println();
+	}
 }

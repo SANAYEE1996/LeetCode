@@ -101,7 +101,7 @@ class IntegrationTest {
 		System.out.println(jumpgame.canJump(new int[] {3,2,1,0,4}));
 		System.out.println(jumpgame.jump(new int[] {2,3,1,1,4}));
 		System.out.println(jumpgame.jump(new int[] {2,2,0,1,4}));
-		System.out.println(jumpgame.jump(new int[] {2,3,5,1,4,0,0,1,1}));
+		System.out.println(jumpgame.jump(new int[] {2,3,5,1,1,0,0,1,1}));
 	}
 
 }

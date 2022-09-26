@@ -1,6 +1,7 @@
 package medium;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EquationsPossible {
 	
@@ -11,39 +12,41 @@ public class EquationsPossible {
 	
 	public boolean equationsPossible(String[] equations) {
 		
-		ArrayList<Character> sameList = new ArrayList<>();
-		ArrayList<Character> differList = new ArrayList<>();
+		HashMap<String, ArrayList<Character>> map = new HashMap<>();
 		
 		char head = 0;
 		char tail = 0;
+		String same = "same";
+		String differ = "differ";
+		String headKey = "";
+		String tailKey = "";
 		
 		for(String s : equations) {
 			head = s.charAt(0);
 			tail = s.charAt(3);
 			if(s.contains("==")) {
-				if(differList.contains(head) && differList.contains(tail)) {
-					return false;
-				}
-				if(!sameList.contains(head)) {
-					sameList.add(head);
-				}
-				if(!sameList.contains(tail)) {
-					sameList.add(tail);
-				}
+				headKey = head + same;
+				tailKey = tail + same;
+				putNewMap(headKey, tailKey, map);
+				
 			}
 			else if(s.contains("!=")) {
-				if(sameList.contains(head) && sameList.contains(tail)) {
-					return false;
-				}
-				if(!differList.contains(head)) {
-					differList.add(head);
-				}
-				if(!differList.contains(tail)) {
-					differList.add(tail);
-				}
+				headKey = head + differ;
+				tailKey = tail + differ;
+				putNewMap(headKey, tailKey, map);
+				
 			}
 		}
 		
         return true;
     }
+	
+	void putNewMap(String headKey, String tailKey, HashMap<String, ArrayList<Character>> map) {
+		if(!map.containsKey(headKey)) {
+			map.put(headKey, new ArrayList<Character>());
+		}
+		if(!map.containsKey(tailKey)) {
+			map.put(tailKey, new ArrayList<Character>());
+		}
+	}
 }

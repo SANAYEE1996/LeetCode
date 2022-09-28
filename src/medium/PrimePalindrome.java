@@ -3,17 +3,15 @@ package medium;
 public class PrimePalindrome {
 	public int primePalindrome(int n) {
         while(n <= Integer.MAX_VALUE){
-            if(isPrime(n)){
-                if(isPalindrome(n)){
-                    return n;
-                }
+            if(isPrime(n) && isPalindrome(n)){
+                return n;
             }
             n++;
         }
         return n;
     }
     
-    public boolean isPrime(int n){
+    boolean isPrime(int n){
         if(n < 2){
             return false;
         }
@@ -25,24 +23,11 @@ public class PrimePalindrome {
         return true;
     }
     
-    public boolean isPalindrome(int x) {
+    boolean isPalindrome(int x) {
         if(x < 0) return false;
         int size = getIntegerLength(x);
-        
-        int divideSize = size/2;
-        int moduleSize = size/2;
-        int head = 0;
-        int tail = 0;
-        
-        if(size%2 == 0) {
-        	head = x/(int)Math.pow(10, divideSize);
-        	tail = x%(int)Math.pow(10, moduleSize);
-        }
-        else {
-        	head = x/(int)Math.pow(10, divideSize+1);
-        	tail = x%(int)Math.pow(10, moduleSize);
-        }
-        tail = reverseInteger(tail,moduleSize);
+        int head = (size % 2 == 0) ? x/(int)Math.pow(10, size/2) : x/(int)Math.pow(10, size/2+1);
+        int tail = reverseInteger(x%(int)Math.pow(10, size/2),size/2);
         return (head==tail);
     }
     
@@ -58,7 +43,7 @@ public class PrimePalindrome {
 	}
 	
     
-    public int getIntegerLength(int n) {
+    int getIntegerLength(int n) {
     	int count = 0;
     	while(n > 0) {
     		n /= 10;

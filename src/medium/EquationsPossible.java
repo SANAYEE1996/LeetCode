@@ -49,4 +49,8 @@ public class EquationsPossible {
 			map.put(tailKey, new ArrayList<Character>());
 		}
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(new StringBuilder("1234").insert(2, " : ").toString());
+	}
 }

@@ -1,6 +1,27 @@
 package medium;
 
 public class PrimePalindrome {
+	
+	static boolean prime[] = new boolean[Integer.MAX_VALUE];
+	
+	static {
+		prime[0] = prime[1] = true;
+		int n = Integer.MAX_VALUE-1;
+		for(int i = 2; i*i <= n; i++) {
+			if(!prime[i]) {
+				for(int j = i*i; j <= n; j += i) {
+					prime[j] = true;
+				}
+			}
+		}
+		for(int i = 1; i <= 100; i++) {
+			if(prime[i]) {
+				System.out.println(i);
+			}
+		}
+	}
+	
+	
 	public int primePalindrome(int n) {
         while(n <= Integer.MAX_VALUE){
             if(isPrime(n) && isPalindrome(n)){

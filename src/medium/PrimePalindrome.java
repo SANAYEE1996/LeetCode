@@ -13,7 +13,7 @@ public class PrimePalindrome {
         return n;
     }
     
-    boolean isPrime(int n){
+    public boolean isPrime(int n){
         if(n < 2){
             return false;
         }
@@ -27,26 +27,43 @@ public class PrimePalindrome {
     
     public boolean isPalindrome(int x) {
         if(x < 0) return false;
-        String s = String.valueOf(x);
-        String head;
-        String tail;
-        if(s.length() % 2 == 1) {
-        	head = (s.length()/2 > 0) ? s.substring(0, s.length()/2) : s.substring(0,1);
-        	tail = (s.length()/2+1 < s.length()) ? s.substring(s.length()/2+1) : s;
+        int size = getIntegerLength(x);
+        
+        int divideSize = size/2;
+        int moduleSize = size/2;
+        int head = 0;
+        int tail = 0;
+        
+        if(size%2 == 0) {
+        	head = x/(int)Math.pow(10, divideSize);
+        	tail = x%(int)Math.pow(10, moduleSize);
         }
         else {
-        	head = (s.length()/2 > 0) ? s.substring(0, s.length()/2) : s;
-        	tail = (s.length()/2 < s.length()) ? s.substring(s.length()/2) : s;
+        	head = x/(int)Math.pow(10, divideSize+1);
+        	tail = x%(int)Math.pow(10, moduleSize);
         }
-        return head.equals(getReverseString(tail));
+        tail = reverseInteger(tail,moduleSize);
+        return (head==tail);
     }
     
-    String getReverseString(String s) {
-    	StringBuilder sb = new StringBuilder();
-    	for(int i = s.length()-1; i >= 0; i--) {
-    		sb.append(s.charAt(i));
+    int reverseInteger(int n, int size) {
+		int mit = 0;
+		int answer = 0;
+		for(int i = 1; i <= size; i++) {
+			mit = (n%(int)Math.pow(10, i))/(int) Math.pow(10, i-1);
+			answer += (mit*(int)Math.pow(10, size-i));
+			n -= mit*(int) Math.pow(10, i-1);
+		}
+		return answer;
+	}
+	
+    
+    public int getIntegerLength(int n) {
+    	int count = 0;
+    	while(n > 0) {
+    		n /= 10;
+    		count++;
     	}
-    	return sb.toString();
+    	return count;
     }
-    
 }

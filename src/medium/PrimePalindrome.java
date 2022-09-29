@@ -2,54 +2,31 @@ package medium;
 
 public class PrimePalindrome {
 	
-	static boolean prime[] = new boolean[Integer.MAX_VALUE];
-	
-	static {
-		prime[0] = prime[1] = true;
-		int n = Integer.MAX_VALUE-1;
-		for(int i = 2; i*i <= n; i++) {
-			if(!prime[i]) {
-				for(int j = i*i; j <= n; j += i) {
-					prime[j] = true;
-				}
-			}
-		}
-		for(int i = 1; i <= 100; i++) {
-			if(prime[i]) {
-				System.out.println(i);
-			}
-		}
-	}
-	
-	
-	public int primePalindrome(int n) {
-        while(n <= Integer.MAX_VALUE){
-            if(isPrime(n) && isPalindrome(n)){
-                return n;
-            }
-            n++;
+	public int primePalindrome(int N) {
+        if (8 <= N && N <= 11) return 11;
+        int y;
+        for (int x = 1; x < 100000; x++) {
+            y = headPalindrome(x) + tailPalindrome(x);
+            if (y >= N && isPrime(y)) return y;
         }
-        return n;
+        return -1;
     }
     
-    boolean isPrime(int n){
-        if(n < 2){
-            return false;
-        }
-        for(int i = 2; i <= Math.sqrt(n); i++){
-            if(n % i == 0){
-                return false;
-            }
-        }
+    boolean isPrime(int x){
+    	if (x < 2 || x % 2 == 0) return x == 2;
+        for (int i = 3; i * i <= x; i += 2)
+            if (x % i == 0) return false;
         return true;
     }
     
-    boolean isPalindrome(int x) {
-        if(x < 0) return false;
-        int size = getIntegerLength(x);
-        int head = (size % 2 == 0) ? x/(int)Math.pow(10, size/2) : x/(int)Math.pow(10, size/2+1);
-        int tail = reverseInteger(x%(int)Math.pow(10, size/2),size/2);
-        return (head==tail);
+    int headPalindrome(int x) {
+        if(x < 0) return 0;
+        return x *(int) Math.pow(10, getIntegerLength(x)-1);
+    }
+    
+    int tailPalindrome(int x) {
+        if(x < 0) return 0;
+        return reverseInteger((x - (x%(int)Math.pow(10, 1)))/10,getIntegerLength(x)-1);
     }
     
     int reverseInteger(int n, int size) {

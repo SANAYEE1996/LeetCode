@@ -17,7 +17,7 @@ public class FindClosestElements {
         for(int i = 0; i <= lastIndex; i++) {
         	minSum += copyArr[i];
         }
-        sum = minSum;
+        sum = minSum; 
         for(int i = 1; i <= arr.length-k; i++) {
         	sum -= copyArr[i-1];
         	sum += copyArr[i+k-1];

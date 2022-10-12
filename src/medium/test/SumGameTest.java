@@ -18,7 +18,13 @@ class SumGameTest {
 
 	@Test
 	void test() {
-		assertEquals(false,sg.sumGame(""));
+		assertEquals(false,sg.sumGame("?3295???"));
+		System.out.println();
+		assertEquals(false,sg.sumGame("5023"));
+		System.out.println();
+		assertEquals(true,sg.sumGame("25??"));
+		System.out.println();
+		assertEquals(true,sg.sumGame("9?"));
 	}
 
 }

@@ -4,30 +4,14 @@ public class SumGame {
 	
 	
 	/* alice		bob
-	 * ?329 		5???
+	 * ?29 		5???
 	 * 
 	 * */
 	public boolean sumGame(String num) {
-        int beforeSum = 0;
-        int afterSum = 0;
-        int beforeUnknownCount = 0;
-        int afterUnknownCount = 0;
-        for(int i = 0; i < num.length()/2; i++) {
-        	if(num.charAt(i) == '?') {
-        		beforeUnknownCount++;
-        		continue;
-        	}
-        	beforeSum += (int) num.charAt(i);
-        }
-        for(int i = num.length()/2; i < num.length(); i++) {
-        	if(num.charAt(i) == '?') {
-        		beforeUnknownCount++;
-        		continue;
-        	}
-        	afterSum += (int) num.charAt(i);
-        }
-		
-		
-		return false;
+		int n = num.length();
+        double res = 0;
+        for (int i = 0; i < n; ++i)
+            res += (i < n / 2 ? 1 : -1) * (num.charAt(i) == '?' ? 4.5 : num.charAt(i) - '0');
+        return res != 0;
     }
 }

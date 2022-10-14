@@ -17,10 +17,23 @@ class SimplifyPathTest {
 	}
 
 	@Test
-	void test() {
+	void test01() {
 		assertEquals("/home",sp.simplifyPath("/home/"));
+	}
+	
+	@Test
+	void test02() {
 		assertEquals("/c",sp.simplifyPath("/a/./b/../../c/"));
-		assertEquals("/c",sp.simplifyPath("/a/../../b/../c//.//.//"));
+	}
+	
+	@Test
+	void test03() {
+		assertEquals("/c",sp.simplifyPath("/a/../../b/../c//.//"));
+	}
+	
+	@Test
+	void test04() {
+		assertEquals("/a/b/c",sp.simplifyPath("/a//b////c/d//././/.."));
 	}
 
 }

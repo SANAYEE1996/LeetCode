@@ -11,13 +11,15 @@ public class SimplifyPath {
 				continue;
 			}
 			else if(path.charAt(i) == '.') {
-				if(i+1 < path.length() && path.charAt(i+1) == '.') {
+				if(i+2 < path.length() && path.charAt(i+1) == '.' && path.charAt(i+2) == '/') {
 					i++;
 					sb.setLength(0);
 					sb.append(getBeforePath(exam));
 					continue;
 				}
-				continue;
+				else if(i+1 < path.length() && path.charAt(i+1) == '/') {
+					continue;
+				}
 			}
 			else if(path.charAt(i) == '/' && i == path.length()-1) {
 				break;

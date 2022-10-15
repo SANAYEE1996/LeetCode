@@ -35,5 +35,10 @@ class SimplifyPathTest {
 	void test04() {
 		assertEquals("/a/b/c",sp.simplifyPath("/a//b////c/d//././/.."));
 	}
+	
+	@Test
+	void test05() {
+		assertEquals("/...",sp.simplifyPath("/..."));
+	}
 
 }

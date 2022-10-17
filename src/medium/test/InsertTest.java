@@ -28,10 +28,13 @@ class InsertTest {
 		int[] f = {5,7};
 		int[][] g = {{1,5}};
 		int[] h = {2,3};
+		int[][] i = {{1,2},{3,4},{8,9}};
+		int[] j = {6,7};
 		System.out.println(insert.insert(a, b));
 		System.out.println(insert.insert(c, d));
 		System.out.println(insert.insert(e, f));
 		System.out.println(insert.insert(g, h));
+		System.out.println(insert.insert(i, j));
 	}
 
 }

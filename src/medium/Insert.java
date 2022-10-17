@@ -2,44 +2,77 @@ package medium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Insert {
 	public int[][] insert(int[][] intervals, int[] newInterval) {
-		if(intervals.length == 0) {
-			return new int[][] {{newInterval[0],newInterval[1]}};
-		}
-		ArrayList<int[]> containList = new ArrayList<>();
-		ArrayList<int[]> originList = new ArrayList<>();
-		for(int[] i : intervals) {
-			if((i[0] <= newInterval[0] && newInterval[0] <= i[1]) || 
-			   (i[0] <= newInterval[1] && newInterval[1] <= i[1]) ||
-			   (newInterval[0] <= i[0] && i[1] <= newInterval[1])) {
-				containList.add(i);
+		System.out.println("input : " + Arrays.toString(newInterval));
+		printArray(intervals);
+		ArrayList<int[]> answerList = new ArrayList<>();
+		int[] start = new int[2];
+		int[] end = new int[2];
+		boolean isHere = false;
+		for(int i = 0; i < intervals.length; i++) {
+			if(intervals[i][0] > newInterval[1] || intervals[i][1] < newInterval[0]) {
+				answerList.add(intervals[i]);
 				continue;
 			}
-			originList.add(i);
+			isHere = true;
+			start = intervals[i];
+			for(;i< intervals.length; i++) {
+				if(intervals[i][0] > newInterval[1] || intervals[i][1] < newInterval[0]) {
+					break;
+				}
+			}
+			i = i > 0 ? i - 1 : 0;
+			end = intervals[i];
+			answerList.add(getOptimizeArray(start, end, newInterval));
 		}
-		int[] inputArray = new int[2];
-		inputArray[0] = (newInterval[0] < containList.get(0)[0]) ? newInterval[0] : containList.get(0)[0];
-		inputArray[1] = (newInterval[1] < containList.get(containList.size()-1)[1]) ? containList.get(containList.size()-1)[1] : newInterval[1];
-        //System.out.println(Arrays.toString(inputArray));
-        for(int i = 0; i < originList.size(); i++) {
-        	if(inputArray[1] < originList.get(i)[0]) {
-        		originList.add(i, inputArray);
-        		break;
-        	}
-        }
-        printArrayList(originList);
-        int[][] answer = new int[originList.size()][2];
-        for(int i = 0; i < answer.length; i++) {
-        	answer[i] = originList.get(i);
-        }
-		return answer;
+		if(!isHere) {
+			answerList.add(newInterval);
+			sortList(answerList);
+		}
+		System.out.print("answer List : ");
+		printArrayList(answerList);
+		return getArrayFromList(answerList);
     }
 	
-	void printArrayList(ArrayList<int[]> originList) {
+	private void sortList(ArrayList<int[]> answerList) {
+		Collections.sort(answerList, new Comparator<int[]>(){
+			@Override
+			public int compare(int[] a, int[] b) {
+				return a[0] - b[0];
+			}
+		});
+	}
+	
+	private int[][] getArrayFromList(ArrayList<int[]> answerList){
+		int[][] answer = new int[answerList.size()][2];
+		for(int i = 0; i < answer.length; i++) {
+			answer[i] = answerList.get(i);
+		}
+		return answer;
+	}
+	
+	private int[] getOptimizeArray(int[] start, int[] end, int[] newInterval) {
+		int min = Math.min(start[0], Math.min(end[0], newInterval[0]));
+		int max = Math.max(start[1], Math.max(end[1], newInterval[1]));
+		return new int[] {min,max};
+	}
+	
+	private void printArray(int[][] intervals) {
+		for(int[] i : intervals) {
+			System.out.print(Arrays.toString(i) + " ");
+		}
+		System.out.println();
+	}
+	
+	private void printArrayList(ArrayList<int[]> originList) {
 		for(int[] i : originList) {
 			System.out.print(Arrays.toString(i) + " ");
 		}
+		System.out.println();
 	}
+	
 }

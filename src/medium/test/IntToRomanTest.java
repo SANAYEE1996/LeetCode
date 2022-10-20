@@ -18,22 +18,22 @@ class IntToRomanTest {
 	
 	@Test
 	void testOneNumber() {
-		assertEquals("",ir.intToRoman(4));
+		assertEquals("IV",ir.intToRoman(4));
 	}
 	
 	@Test
 	void testTwoNumber() {
-		assertEquals("",ir.intToRoman(39));
+		assertEquals("XXXIX",ir.intToRoman(39));
 	}
 	
 	@Test
 	void testThreeNumber() {
-		assertEquals("",ir.intToRoman(999));
+		assertEquals("CMXCIX",ir.intToRoman(999));
 	}
 	
 	@Test
 	void testFourNumber() {
-		assertEquals("",ir.intToRoman(3999));
+		assertEquals("MMMCMXCIX",ir.intToRoman(3999));
 	}
-
+	
 }

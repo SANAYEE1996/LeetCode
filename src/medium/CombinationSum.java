@@ -16,13 +16,16 @@ public class CombinationSum {
 	private void goCombination(List<List<Integer>> answerList, int[] candidates, int target, int startIndex, int sum, List<Integer> ship) {
 		
 		int cloneSum = 0;
+		int beforeValue = -100;
 		for(int i = startIndex; i < candidates.length; i++) {
 			if(candidates[i] > target) break;
+			if(candidates[i] == beforeValue) continue;
 			List<Integer> cloneShipList = new ArrayList<>(ship);
 			cloneSum = sum + candidates[i];
+			beforeValue = candidates[i];
 			if(cloneSum < target) {
 				cloneShipList.add(candidates[i]);
-				goCombination(answerList, candidates, target, i, cloneSum, cloneShipList);
+				goCombination(answerList, candidates, target, i+1, cloneSum, cloneShipList);
 				continue;
 			}
 			else if(cloneSum == target) {
@@ -39,6 +42,7 @@ public class CombinationSum {
 		System.out.println(s.combinationSum(new int[] {2,3,6,7}, 7));
 		System.out.println(s.combinationSum(new int[] {2,3,5}, 8));
 		System.out.println(s.combinationSum(new int[] {2}, 1));
-		System.out.println(s.combinationSum(new int[] {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17}, 100));
+		System.out.println(s.combinationSum(new int[] {10,1,2,7,6,1,5}, 8));
+		System.out.println(s.combinationSum(new int[] {2,5,2,1,2}, 5));
 	}
 }

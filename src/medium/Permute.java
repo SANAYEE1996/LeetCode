@@ -23,7 +23,7 @@ public class Permute {
 	}
 	
 	private void goPermute(List<List<Integer>> answerList, List<Integer> ship, List<Integer> battle) {
-		if(ship.size() == 0) {
+		if(ship.size() == 0 && !answerList.contains(battle)) {
 			answerList.add(battle);
 			return;
 		}
@@ -35,5 +35,10 @@ public class Permute {
 			goPermute(answerList, shipCloneList, battleCloneList);
 		}
 	}
-
+	
+	public static void main(String[] args) {
+		Permute s = new Permute();
+		System.out.println(s.permute(new int[] {1,2,3,4,5,6,7,8}).size());
+		System.out.println(s.permute(new int[] {1,1,2}));
+	}
 }

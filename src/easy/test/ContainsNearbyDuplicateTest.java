@@ -18,7 +18,9 @@ class ContainsNearbyDuplicateTest {
 	
 	@Test
 	void test() {
-		assertEquals(1,1);
+		assertEquals(true,c.containsNearbyDuplicate(new int[] {1,2,3,1}, 3));
+		assertEquals(true,c.containsNearbyDuplicate(new int[] {1,0,1,1}, 1));
+		assertEquals(false,c.containsNearbyDuplicate(new int[] {1,2,3,1,2,3}, 2));
 	}
 
 }

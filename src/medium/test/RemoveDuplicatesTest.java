@@ -18,12 +18,12 @@ class RemoveDuplicatesTest {
 	
 	@Test
 	void testOneCase() {
-		assertEquals(0,rd.removeDuplicates(new int[] {1,1,1,2,2,3}));
+		assertEquals(5,rd.removeDuplicates(new int[] {1,1,1,2,2,3}));
 	}
 	
 	@Test
 	void testTwoCase() {
-		assertEquals(0,rd.removeDuplicates(new int[] {0,0,1,1,1,1,2,3,3}));
+		assertEquals(7,rd.removeDuplicates(new int[] {0,0,1,1,1,1,2,3,3}));
 	}
 
 }

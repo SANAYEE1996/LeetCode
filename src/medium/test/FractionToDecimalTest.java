@@ -18,7 +18,11 @@ class FractionToDecimalTest {
 	
 	@Test
 	void test() {
-		assertEquals("",f.fractionToDecimal(4, 2));
+		assertEquals("",f.fractionToDecimal(1, 2));
+		assertEquals("2",f.fractionToDecimal(2, 1));
+		assertEquals("37",f.fractionToDecimal(74, 2));
+		assertEquals("",f.fractionToDecimal(4, 333));
+		assertEquals("",f.fractionToDecimal(37, 333));
 	}
 
 }

@@ -28,7 +28,14 @@ class MaxProductTest {
 	
 	@Test
 	void testCaseEvenMinus() {
-		assertEquals(0,mp.maxProduct(new int[] {1,1,-1,2,4,-2,5}));
+		assertEquals(0,mp.maxProduct(new int[] {1,1,-1,2,4,-2,5,-3,4,5,6,7}));
+	}
+	
+	@Test
+	void testCaseZeroExist() {
+		assertEquals(0,mp.maxProduct(new int[] {-2,0,-1}));
+		assertEquals(0,mp.maxProduct(new int[] {-2,0,-1,-1,-1,0,0,5}));
+		assertEquals(0,mp.maxProduct(new int[] {0,0}));
 	}
 
 }

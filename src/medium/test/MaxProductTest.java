@@ -36,6 +36,7 @@ class MaxProductTest {
 		assertEquals(0,mp.maxProduct(new int[] {-2,0,-1}));
 		assertEquals(0,mp.maxProduct(new int[] {-2,0,-1,-1,-1,0,0,5}));
 		assertEquals(0,mp.maxProduct(new int[] {0,0}));
+		assertEquals(0,mp.maxProduct(new int[] {0,0,-1,1,0}));
 	}
 
 }

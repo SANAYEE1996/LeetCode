@@ -5,41 +5,38 @@ import java.util.Arrays;
 public class MaxProduct {
 	public int maxProduct(int[] nums) {
 		System.out.println("input : " +Arrays.toString(nums));
-		int sumProductValue = 1;
-		int beforeSumProductValue = 1;
+		int sumProductValue = nums[0];
+		int beforeSumProductValue = nums[0];
 		int beforeMinusOrZero = -11;
 		
-		for(int i : nums) {
-			if(i > 0) {
-				sumProductValue *= i;
+		for(int i = 1; i < nums.length; i++) {
+			if(nums[i] > 0) {
+				sumProductValue *= nums[i];
 			}
-			else if(i == 0) {
+			else if(nums[i] == 0) {
 				if(sumProductValue < 0) {
-					sumProductValue *= i;
-				}
-				else if(sumProductValue == 0) {
-					
+					beforeSumProductValue = sumProductValue;
+					sumProductValue *= nums[i];
+					beforeMinusOrZero = 1;
 				}
 				else {
 					beforeSumProductValue = sumProductValue;
-					sumProductValue = 1;
 					beforeMinusOrZero = 1;
 				}
 			}
 			else {
 				if(sumProductValue < 0) {
-					sumProductValue *= i;
+					sumProductValue *= nums[i];
 				}
 				else if(sumProductValue == 0) {
-					System.out.println("패치 중");
 					beforeSumProductValue = sumProductValue;
 					sumProductValue = 1;
-					beforeMinusOrZero = i;
+					beforeMinusOrZero = nums[i];
 				}
 				else {
-					sumProductValue *= i;
+					sumProductValue *= nums[i];
 					beforeSumProductValue = sumProductValue;
-					beforeMinusOrZero = i;
+					beforeMinusOrZero = nums[i];
 				}
 			}
 		}

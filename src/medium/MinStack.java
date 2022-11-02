@@ -1,15 +1,15 @@
 package medium;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class MinStack {
 	
-	private LinkedList<Integer> list;
+	private ArrayList<Integer> list;
 	
 	private int minValue;
 	
 	public MinStack() {
-        list = new LinkedList<>();
+        list = new ArrayList<>();
         minValue = Integer.MAX_VALUE;
     }
     
@@ -19,8 +19,15 @@ public class MinStack {
     }
     
     public void pop() {
-    	
-        list.remove(0);
+    	if(list.size() > 0) {
+    		list.remove(list.size()-1);
+    		int minValueExam = Integer.MAX_VALUE;
+    		for(int i = 0; i < list.size(); i++) {
+    			minValueExam = (list.get(i) < minValueExam) ? list.get(i) : minValueExam;
+    		}
+    		minValue = minValueExam;
+    		return;
+    	}
     }
     
     public int top() {

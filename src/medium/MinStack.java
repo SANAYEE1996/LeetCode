@@ -25,7 +25,7 @@ public class MinStack {
     		for(int i = 0; i < list.size(); i++) {
     			minValueExam = (list.get(i) < minValueExam) ? list.get(i) : minValueExam;
     		}
-    		minValue = minValueExam;
+    		minValue = (minValueExam == Integer.MAX_VALUE) ? 0 : minValueExam;
     		return;
     	}
     }

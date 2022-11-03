@@ -31,12 +31,13 @@ public class LongestPalindromeFromArray {
 		}
 		int answer = 0;
 		for(String key : map.keySet()) {
+//			System.out.println("not same key : " +key + "  and count : " +Arrays.toString(map.get(key)));
 			answer += 4*Math.min(map.get(key)[0], map.get(key)[1]);
 		}
 		int maxSameCount = 0;
 		String maxSameKey = "";
 		for(String key : sameCharMap.keySet()) {
-			System.out.println("same key : " +key + "  and count : " +sameCharMap.get(key));
+//			System.out.println("same key : " +key + "  and count : " +sameCharMap.get(key));
 			if(maxSameCount < sameCharMap.get(key)) {
 				maxSameCount = sameCharMap.get(key);
 				maxSameKey = key;
@@ -45,32 +46,26 @@ public class LongestPalindromeFromArray {
 		sameCharMap.remove(maxSameKey);
 		int sameCount = 0;
 		int value = 0;
+        boolean onlyOneChance = (maxSameCount > 1) ? true: false;
 		for(String key : sameCharMap.keySet()) {
 			value = sameCharMap.get(key);
-			System.out.println("same key : " +key + "  's count : " +value + " total count : " +sameCount);
-			if(maxSameCount % 2 == 0) {
-				if(maxSameCount >= value) {
-					if(value % 2 == 0) {
-						sameCount += value;
-					}
-					else {
-						sameCount += (value-1);
-					}
+//			System.out.println("same key : " +key + "  's count : " +value + " total count : " +sameCount);
+            if(onlyOneChance && value == 1){
+                sameCount += 1;
+                onlyOneChance = false;
+                continue;
+            }
+			if(maxSameCount >= value) {
+				if(value % 2 == 0) {
+					sameCount += value;
 				}
-			}
-			else {
-				if(maxSameCount > value) {
-					if(value % 2 == 0) {
-						sameCount += value;
-					}
-					else {
-						sameCount += (value-1);
-					}
+				else {
+					sameCount += (value-1);
 				}
 			}
 		}
-		System.out.println("not same String Length : " +answer);
-		System.out.println("same String Length : " +((maxSameCount+sameCount)*2));
+//		System.out.println("not same String Length : " +answer);
+//		System.out.println("same String Length : " +((maxSameCount+sameCount)*2));
         return answer + ((maxSameCount+sameCount)*2);
     }
 	
@@ -89,5 +84,6 @@ public class LongestPalindromeFromArray {
 		System.out.println(s.longestPalindrome(new String[] {"cc","ll","xx"}));
 		System.out.println(s.longestPalindrome(new String[] {"dd","aa","bb","dd","aa","dd","bb","dd","aa","cc","bb","cc","dd","cc"}));
 		System.out.println(s.longestPalindrome(new String[] {"ll","lb","bb","bx","xx","lx","xx","lx","ll","xb","bx","lb","bb","lb","bl","bb","bx","xl","lb","xx"}));
+		System.out.println(s.longestPalindrome(new String[] {"nn","nn","hg","gn","nn","hh","gh","nn","nh","nh"}));
 	}
 }

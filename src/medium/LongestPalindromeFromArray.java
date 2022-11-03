@@ -7,16 +7,16 @@ public class LongestPalindromeFromArray {
 	public int longestPalindrome(String[] words) {
 		System.out.println("input : " +Arrays.toString(words));
 		HashMap<String, int[]> map = new HashMap<>();
-		HashMap<String, Integer> sameCharmap = new HashMap<>();
+		HashMap<String, Integer> sameCharMap = new HashMap<>();
 		String reverseKey;
 		for(String s : words) {
 			reverseKey = getReverseString(s);
 			if(s.charAt(0) == s.charAt(1)) {
-				if(sameCharmap.containsKey(s)) {
-					sameCharmap.put(s, sameCharmap.get(s) + 1);
+				if(sameCharMap.containsKey(s)) {
+					sameCharMap.put(s, sameCharMap.get(s) + 1);
 					continue;
 				}
-				sameCharmap.put(s, 1);
+				sameCharMap.put(s, 1);
 				continue;
 			}
 			if(map.containsKey(s)) {
@@ -31,17 +31,47 @@ public class LongestPalindromeFromArray {
 		}
 		int answer = 0;
 		for(String key : map.keySet()) {
-			System.out.println("not same key : " +key + "   and count : " +Arrays.toString(map.get(key)));
 			answer += 4*Math.min(map.get(key)[0], map.get(key)[1]);
 		}
 		int maxSameCount = 0;
-		for(String key : sameCharmap.keySet()) {
-			System.out.println("same key : " +key + "  and count : " +sameCharmap.get(key));
-			maxSameCount = (maxSameCount < sameCharmap.get(key)) ? sameCharmap.get(key) : maxSameCount;
+		String maxSameKey = "";
+		for(String key : sameCharMap.keySet()) {
+			System.out.println("same key : " +key + "  and count : " +sameCharMap.get(key));
+			if(maxSameCount < sameCharMap.get(key)) {
+				maxSameCount = sameCharMap.get(key);
+				maxSameKey = key;
+			}
 		}
-		System.out.println("same String Length : " +answer);
-		System.out.println("not same String Length : " +(maxSameCount*2));
-        return answer + 2*maxSameCount;
+		sameCharMap.remove(maxSameKey);
+		int sameCount = 0;
+		int value = 0;
+		for(String key : sameCharMap.keySet()) {
+			value = sameCharMap.get(key);
+			System.out.println("same key : " +key + "  's count : " +value + " total count : " +sameCount);
+			if(maxSameCount % 2 == 0) {
+				if(maxSameCount >= value) {
+					if(value % 2 == 0) {
+						sameCount += value;
+					}
+					else {
+						sameCount += (value-1);
+					}
+				}
+			}
+			else {
+				if(maxSameCount > value) {
+					if(value % 2 == 0) {
+						sameCount += value;
+					}
+					else {
+						sameCount += (value-1);
+					}
+				}
+			}
+		}
+		System.out.println("not same String Length : " +answer);
+		System.out.println("same String Length : " +((maxSameCount+sameCount)*2));
+        return answer + ((maxSameCount+sameCount)*2);
     }
 	
 	private String getReverseString(String a) {
@@ -58,5 +88,6 @@ public class LongestPalindromeFromArray {
 		System.out.println(s.longestPalindrome(new String[] {"ab","ty","yt","lc","cl","ab"}));
 		System.out.println(s.longestPalindrome(new String[] {"cc","ll","xx"}));
 		System.out.println(s.longestPalindrome(new String[] {"dd","aa","bb","dd","aa","dd","bb","dd","aa","cc","bb","cc","dd","cc"}));
+		System.out.println(s.longestPalindrome(new String[] {"ll","lb","bb","bx","xx","lx","xx","lx","ll","xb","bx","lb","bb","lb","bl","bb","bx","xl","lb","xx"}));
 	}
 }

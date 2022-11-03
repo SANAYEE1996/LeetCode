@@ -85,5 +85,6 @@ public class LongestPalindromeFromArray {
 		System.out.println(s.longestPalindrome(new String[] {"dd","aa","bb","dd","aa","dd","bb","dd","aa","cc","bb","cc","dd","cc"}));
 		System.out.println(s.longestPalindrome(new String[] {"ll","lb","bb","bx","xx","lx","xx","lx","ll","xb","bx","lb","bb","lb","bl","bb","bx","xl","lb","xx"}));
 		System.out.println(s.longestPalindrome(new String[] {"nn","nn","hg","gn","nn","hh","gh","nn","nh","nh"}));
+		System.out.println(s.longestPalindrome(new String[] {"ga","ac","aa","ag","gc","cg","aa","ac","cg","ga","ga","gg","cg","ca","cg","gg","ca","ag","cc","ag","aa","cg","gg"}));
 	}
 }

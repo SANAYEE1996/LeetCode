@@ -18,10 +18,10 @@ class MakeIntegerBeautifulTest {
 	
 	@Test
 	void test() {
-		assertEquals(0,m.makeIntegerBeautiful(16, 6));
-		assertEquals(0,m.makeIntegerBeautiful(467, 6));
+		assertEquals(4,m.makeIntegerBeautiful(16, 6));
+		assertEquals(33,m.makeIntegerBeautiful(467, 6));
 		assertEquals(0,m.makeIntegerBeautiful(1, 1));
-		assertEquals(0,m.makeIntegerBeautiful(734504727, 10));
+		assertEquals(65495273,m.makeIntegerBeautiful(734504727, 10));
 	}
 
 }

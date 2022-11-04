@@ -6,7 +6,14 @@ public class MakeIntegerBeautiful {
         if(initSumValue <= target){
             return 0;
         }
-
+        long[] ship = new long[3];
+        ship[0] = n;
+        ship[1] = initSumValue;
+        while(ship[1] > target) {
+        	calculateForMakeBeautiful(ship, n);
+        	n = ship[0];
+        }
+        System.out.println("n : " + n + " each sum : " +ship[1] + " need total sum : " +ship[2]);
         return 0;
     }
 
@@ -17,5 +24,20 @@ public class MakeIntegerBeautiful {
             sum += (str.charAt(i) - 48);
         }
         return sum;
+    }
+    
+    private void calculateForMakeBeautiful(long[] ship, long n) {
+    	String str = String.valueOf(n);
+    	long value = 0;
+    	for(int i = str.length()-1; i >= 0; i--) {
+    		if(str.charAt(i) != '0') {
+    			value = (long) Math.pow((10 - (str.charAt(i) - 48)), str.length()-1- i);
+    			n += value;
+    			ship[2] += value;
+    			break;
+    		}
+    	}
+    	ship[0] = n;
+    	ship[1] = getEachNumberSumValue(n);
     }
 }

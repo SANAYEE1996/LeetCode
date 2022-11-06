@@ -18,8 +18,9 @@ class MaximumSubarraySumTest {
 	
 	@Test
 	void test() {
-		assertEquals(0,mss.maximumSubarraySum(new int[] {1,5,4,2,9,9,9},3));
+		assertEquals(15,mss.maximumSubarraySum(new int[] {1,5,4,2,9,9,9},3));
 		assertEquals(0,mss.maximumSubarraySum(new int[] {4,4,4},3));
+		assertEquals(24,mss.maximumSubarraySum(new int[] {1,1,1,7,8,9},3));
 	}
 
 }

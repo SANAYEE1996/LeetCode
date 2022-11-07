@@ -18,7 +18,7 @@ class SubarrayGCDTest {
 	
 	@Test
 	void test() {
-		assertEquals(0,sg.subarrayGCD(new int[] {9,3,1,2,6,3}, 3));
+		assertEquals(4,sg.subarrayGCD(new int[] {9,3,1,2,6,3}, 3));
 		assertEquals(0,sg.subarrayGCD(new int[] {4}, 7));
 	}
 

@@ -19,13 +19,13 @@ class CalculateTest {
 	@Test
 	void onlyAddOrMinustest() {
 		assertEquals(0,c.calculate("1+2+3"));
-		assertEquals(0,c.calculate("1-2-3-100-205"));
+		assertEquals(0,c.calculate("1-2-3- 100- 205"));
 	}
 	
 	@Test
 	void onlyDivideOrMultiplytest() {
-		assertEquals(0,c.calculate("1*2*3"));
-		assertEquals(0,c.calculate("1/2/3/100/205"));
+		assertEquals(0,c.calculate("1 *2 * 3"));
+		assertEquals(0,c.calculate("1 /2 /3/  100/205"));
 	}
 
 }

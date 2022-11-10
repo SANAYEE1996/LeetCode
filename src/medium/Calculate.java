@@ -1,47 +1,41 @@
 package medium;
 
-import java.util.ArrayList;
-
 public class Calculate {
 	public int calculate(String s) {
         s = s.replaceAll(" ","");
-        System.out.println("input String : "+s);
-        int value = 0;
-        ArrayList<String> calNumList = new ArrayList<>();
         for(int i = 0; i < s.length(); i++) {
-        	if(48 <= s.charAt(i) && s.charAt(i) <= 57) {
-        		StringBuilder sb = new StringBuilder();
-        		for(; i < s.length(); i++) {
-        			if(!(48 <= s.charAt(i) && s.charAt(i) <= 57)) {
-        				break;
-        			}
-        			sb.append(s.charAt(i));
-        		}
-        		calNumList.add(sb.toString());
+        	if(s.charAt(i) == '*') {
+        		int beforeValue = getBeforeValue(s, i);
+        		int afterValue = getAfterValue(s, i);
+        		i += String.valueOf(afterValue).length();
         	}
-        	if(i < s.length()) {
-        		calNumList.add(String.valueOf(s.charAt(i)));
-        	}
-        }
-        System.out.println(calNumList);
-        String nowString;
-        for(int i = 0; i < calNumList.size(); i++) {
-        	nowString = calNumList.get(i);
-        	if(nowString.matches("^[0-9]*$")) {
-        		if(i > 0) {
-        			if(calNumList.get(i-1).equals("+")) {
-        				
-        			}
-        			else if(calNumList.get(i-1).equals("-")) {
-        				
-        			}
-        		}
-        		else {
-        			value += Integer.parseInt(nowString);
-        			continue;
-        		}
+        	else if(s.charAt(i) == '*') {
+        		int beforeValue = getBeforeValue(s, i);
+        		int afterValue = getAfterValue(s, i);
+        		i += String.valueOf(afterValue).length();
         	}
         }
         return 0;
     }
+	
+	private int getBeforeValue(String s, int index) {
+		if(index == 0) {
+			return 0;
+		}
+		for(int i = index-1; i >= 0; i--) {
+			if(!(48 <= s.charAt(i) && s.charAt(i) <= 57)) {
+				return Integer.parseInt(s.substring(i+1, index));
+			}
+		}
+		return Integer.parseInt(s.substring(0, index));
+	}
+	
+	private int getAfterValue(String s, int index) {
+		for(int i = index+1; i < s.length(); i++) {
+			if(!(48 <= s.charAt(i) && s.charAt(i) <= 57)) {
+				return Integer.parseInt(s.substring(index+1, i));
+			}
+		}
+		return Integer.parseInt(s.substring(index+1));
+	}
 }

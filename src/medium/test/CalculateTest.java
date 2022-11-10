@@ -27,5 +27,11 @@ class CalculateTest {
 		assertEquals(0,c.calculate("1 *2 * 3"));
 		assertEquals(0,c.calculate("1 /2 /3/  100/205"));
 	}
+	
+	@Test
+	void strangeTest() {
+		assertEquals(0,c.calculate("-1+2+"));
+		assertEquals(0,c.calculate("-1+2*"));
+	}
 
 }

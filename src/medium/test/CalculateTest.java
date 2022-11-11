@@ -17,21 +17,34 @@ class CalculateTest {
 	}
 	
 	@Test
+	void simpleAddTest() {
+		assertEquals(3,c.calculate("1+2"));
+	}
+	
+	@Test
 	void onlyAddOrMinustest() {
-		assertEquals(0,c.calculate("1+2+3"));
-		assertEquals(0,c.calculate("1-2-3- 100- 205"));
+		assertEquals(6,c.calculate("1+2+3"));
+		assertEquals(-309,c.calculate("1-2-3- 100- 205"));
 	}
 	
 	@Test
 	void onlyDivideOrMultiplytest() {
-		assertEquals(0,c.calculate("1 *2 * 3"));
+		assertEquals(6,c.calculate("1 *2 * 3"));
 		assertEquals(0,c.calculate("1 /2 /3/  100/205"));
 	}
 	
 	@Test
 	void strangeTest() {
-		assertEquals(0,c.calculate("-1+2+"));
-		assertEquals(0,c.calculate("-1+2*"));
+		assertEquals(1,c.calculate("-1+2+"));
+		assertEquals(1,c.calculate("-1+2*"));
+		assertEquals(3,c.calculate("*1+2*"));
+		assertEquals(3,c.calculate("/1+2*"));
+	}
+	
+	@Test
+	void originTest() {
+		assertEquals(7,c.calculate("3+2*2"));
+		assertEquals(5,c.calculate(" 3+5 / 2 "));
 	}
 
 }

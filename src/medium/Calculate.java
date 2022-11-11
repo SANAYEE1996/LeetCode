@@ -76,7 +76,7 @@ public class Calculate {
 //        System.out.println("last last value : " +value);
         return value;
     }
-	
+	 
 	private int getAfterValue(String s, int index) {
 		if(index == s.length()-1) {
 			if(s.charAt(index) == '*' || s.charAt(index) == '/') {

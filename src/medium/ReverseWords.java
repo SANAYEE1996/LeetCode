@@ -1,30 +1,35 @@
 package medium;
 
-import java.util.ArrayList;
-
 public class ReverseWords {
 	public String reverseWords(String s) {
 		s = s.trim();
-		ArrayList<String> list = new ArrayList<>();
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < s.length(); i++) {
-			if(s.charAt(i) == ' ') {
-				if(sb.toString() != null && !"".equals(sb.toString())) {
-					list.add(sb.toString());
-				}
-				sb.setLength(0);
+		StringBuilder partSb = new StringBuilder();
+		char beforeChar = 0;
+		for(int i = s.length()-1; i >= 0; i--) {
+			if(s.charAt(i) == ' ' && beforeChar == ' ') {
+				beforeChar = ' ';
 				continue;
 			}
-			sb.append(s.charAt(i));
-		}
-		list.add(sb.toString());
-		sb.setLength(0);
-		for(int i = list.size()-1 ; i >= 0; i--) {
-			sb.append(list.get(i));
-			if(i > 0) {
-				sb.append(" ");
+			else if(s.charAt(i) == ' ' && beforeChar != ' ') {
+				beforeChar = ' ';
+				sb.append(partSb.toString());
+				sb.append(' ');
+				partSb.setLength(0);
+				continue;
 			}
+			partSb.insert(0, s.charAt(i));
+			beforeChar = s.charAt(i);
 		}
+		sb.append(partSb.toString());
 		return sb.toString();
     }
+	
+	public static void main(String[] args) {
+		ReverseWords s = new ReverseWords();
+		
+		System.out.println(s.reverseWords("the sky is blue"));
+		System.out.println(s.reverseWords("  hello world  "));
+		System.out.println(s.reverseWords("a good   example"));
+	}
 }

@@ -14,5 +14,7 @@ public class TreeNodeSimulator {
 		System.out.println(tree.right.left.val);
 		System.out.println(tree.right.right == null);
 	}
-
+	
+	
+	
 }

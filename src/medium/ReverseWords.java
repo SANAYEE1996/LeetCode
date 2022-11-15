@@ -1,30 +1,26 @@
 package medium;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ReverseWords {
 	public String reverseWords(String s) {
-		s = s.trim();
-		ArrayList<String> list = new ArrayList<>();
+		String[] strArray = s.split("\\s+");
+		System.out.println(Arrays.toString(strArray));
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < s.length(); i++) {
-			if(s.charAt(i) == ' ') {
-				if(sb.toString() != null && !"".equals(sb.toString())) {
-					list.add(sb.toString());
-				}
-				sb.setLength(0);
-				continue;
-			}
-			sb.append(s.charAt(i));
-		}
-		list.add(sb.toString());
-		sb.setLength(0);
-		for(int i = list.size()-1 ; i >= 0; i--) {
-			sb.append(list.get(i));
-			if(i > 0) {
-				sb.append(" ");
+		for(int i = strArray.length-1; i >= 0; i--) {
+			sb.append(strArray[i]);
+			if(i != 0) {
+				sb.append(' ');
 			}
 		}
 		return sb.toString();
     }
+	
+	public static void main(String[] args) {
+		ReverseWords s = new ReverseWords();
+		
+		System.out.println(s.reverseWords("the sky is blue")+ "||");
+		System.out.println(s.reverseWords("  hello world  ") + "||");
+		System.out.println(s.reverseWords("a good   example")+ "||");
+	}
 }

@@ -1,13 +1,25 @@
 package medium;
 
+import java.util.HashMap;
+
 public class FindLUSlength {
 	public int findLUSlength(String[] strs) {
 		int answer = 0;
+		HashMap<String, Boolean> map = new HashMap<>();
 		for(int i = 0; i < strs.length; i++) {
 			for(int j = 0; j < strs.length; j++) {
 				if(i == j) continue;
+				if(!map.containsKey(strs[i])) {
+					map.put(strs[i], true);
+				}
+				if(!map.containsKey(strs[j])) {
+					map.put(strs[j], true);
+				}
 				if(isUnCommonRelation(strs[i], strs[j])) {
 					answer = Math.max(answer, Math.max(strs[i].length(), strs[j].length()));
+				}
+				else {
+					
 				}
 			}
 		}

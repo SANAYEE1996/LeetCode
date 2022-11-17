@@ -18,7 +18,7 @@ class ComputeAreaTest {
 	
 	@Test
 	void test() {
-		assertEquals(0,c.computeArea(-3,0,3,4,0,-1,9,2));
+		assertEquals(45,c.computeArea(-3,0,3,4,0,-1,9,2));
 	}
 
 }

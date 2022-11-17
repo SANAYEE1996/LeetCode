@@ -6,21 +6,24 @@ public class FindLUSlength {
 	public int findLUSlength(String[] strs) {
 		int answer = 0;
 		HashMap<String, Boolean> map = new HashMap<>();
+		for(String s : strs) {
+			map.put(s, true);
+		}
 		for(int i = 0; i < strs.length; i++) {
 			for(int j = 0; j < strs.length; j++) {
 				if(i == j) continue;
-				if(!map.containsKey(strs[i])) {
-					map.put(strs[i], true);
+				
+				if(!isUnCommonRelation(strs[i], strs[j])) {
+					map.put(strs[i], false);
+					map.put(strs[j], false);
 				}
-				if(!map.containsKey(strs[j])) {
-					map.put(strs[j], true);
-				}
-				if(isUnCommonRelation(strs[i], strs[j])) {
-					answer = Math.max(answer, Math.max(strs[i].length(), strs[j].length()));
-				}
-				else {
-					
-				}
+			}
+		}
+		
+		for(String key : map.keySet()) {
+//			System.out.println("key : " +key + "    booelan : " +map.get(key));
+			if(map.get(key)) {
+				answer = Math.max(answer, key.length());
 			}
 		}
         return (answer == 0) ? -1 : answer;
@@ -36,7 +39,7 @@ public class FindLUSlength {
 					b = b.substring(1);
 				}
 			}
-			return "".equals(b);
+			return !"".equals(b);
 		}
 		for(int i = 0; i < b.length(); i++) {
 			if("".equals(a)) {
@@ -46,6 +49,6 @@ public class FindLUSlength {
 				a = a.substring(1);
 			}
 		}
-		return "".equals(a);
+		return !"".equals(a);
 	}
 }

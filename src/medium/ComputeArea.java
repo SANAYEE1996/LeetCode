@@ -17,10 +17,29 @@ public class ComputeArea {
 		int bxMax = Math.max(bx1, bx2);
 		
 		if(axMin <= bxMin && bxMin <= axMax) {
+			if(bxMax <= axMax) {
+				return bxMax-bxMin;
+			}
 			return axMax - bxMin;
 		}
 		else if(axMin <= bxMax && bxMax <= axMax) {
+			if(axMin <= bxMin) {
+				return bxMax-bxMin;
+			}
 			return bxMax - axMin;
+		}
+		
+		if(bxMin <= axMin && axMin <= bxMax) {
+			if(axMax <= bxMax) {
+				return axMax-axMin;
+			}
+			return bxMax - axMin;
+		}
+		else if(bxMin <= axMax && axMax <= bxMax) {
+			if(bxMin <= axMin) {
+				return axMax-axMin;
+			}
+			return axMax - bxMin;
 		}
 		return 0;
 	}

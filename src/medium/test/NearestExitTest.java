@@ -19,13 +19,25 @@ class NearestExitTest {
 	@Test
 	void test() {
 		char[][] maze = {{'+','+','+'},{'.','.','.'},{'+','+','+'}};
-		assertEquals(-1,ne.nearestExit(maze, new int[] {1,0}));
+		assertEquals(2,ne.nearestExit(maze, new int[] {1,0}));
 	}
 	
 	@Test
 	void testNoWay() {
 		char[][] maze =  {{'.','+'}};
 		assertEquals(-1,ne.nearestExit(maze, new int[] {0,0}));
+	}
+	
+	@Test
+	void testRight() {
+		char[][] maze = {{'+','+','.','+'},{'.','.','.','+'},{'+','+','+','.'}};
+		assertEquals(1,ne.nearestExit(maze, new int[] {1,2}));
+	}
+	
+	@Test
+	void testPlease() {
+		char[][] maze = {{'.','+','+','+','+'},{'.','+','.','.','.'},{'.','+','.','+','.'},{'.','.','.','+','.'},{'+','+','+','+','.'}};
+		assertEquals(1,ne.nearestExit(maze, new int[] {0,0}));
 	}
 
 }

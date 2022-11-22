@@ -1,6 +1,7 @@
 package medium;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class NumSquares {
@@ -12,18 +13,26 @@ public class NumSquares {
 	}
 	
 	public int numSquares(int n) {
-		gogo(n);
-		System.out.println(list);
-		return 0;
+		if(n < 4) {
+			return n;
+		}
+//		System.out.println("input : " +n);
+		gogo(n, 0);
+//		System.out.println(list);
+		return Collections.min(list);
 	}
 	
-	private int gogo(int n) {
-		if(n < 4) return n;
-		
-		for(int i = 2; i <= Math.sqrt(n); i++) {
-			list.add(gogo(n - (int)Math.pow(i, 2)));
+	private void gogo(int n, int count) {
+		if(n < 4) {
+			list.add(count + n);
+			return;
 		}
 		
-		return 0;
+		int cnt = count;
+		for(int i = 2; i <= Math.sqrt(n); i++) {
+			cnt = count;
+			gogo(n - (int)Math.pow(i, 2), cnt+1);
+		}
+		
 	}
 }

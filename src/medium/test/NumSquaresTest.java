@@ -18,7 +18,8 @@ class NumSquaresTest {
 
 	@Test
 	void test() {
-		assertEquals(0,ns.numSquares(1));
+		assertEquals(0 , ns.numSquares(12));
+		assertEquals(0 , ns.numSquares(9));
 	}
 
 }

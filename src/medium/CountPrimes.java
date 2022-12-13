@@ -5,7 +5,6 @@ public class CountPrimes {
         int answer = 0;
         for(int i = 0; i <= n; i++){
             if(isPrimeNumber(i)){
-                System.out.println("prime : "+i);
                 answer++;
             }
         }
@@ -23,4 +22,10 @@ public class CountPrimes {
         }
         return true;
     }
+    
+    public static void main(String[] args) {
+		CountPrimes s = new CountPrimes();
+		System.out.println(s.countPrimes(2));
+		System.out.println(s.countPrimes(5000000));
+	}
 }

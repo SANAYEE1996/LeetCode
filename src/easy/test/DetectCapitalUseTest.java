@@ -20,7 +20,10 @@ class DetectCapitalUseTest {
 	@Test
 	void test() {
 		assertTrue(dc.detectCapitalUse("USA"));
+		assertTrue(dc.detectCapitalUse("Leetcode"));
 		assertFalse(dc.detectCapitalUse("FlaG"));
+		assertFalse(dc.detectCapitalUse("leetCode"));
+		assertFalse(dc.detectCapitalUse("FFFFFFFf"));
 	}
 
 }

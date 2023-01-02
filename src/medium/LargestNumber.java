@@ -17,7 +17,6 @@ public class LargestNumber {
         for(int i : numsList) {
         	sb.append(i);
         }
-        System.out.println();
 		return sb.toString();
     }
 	
@@ -34,6 +33,6 @@ public class LargestNumber {
 				return 1;
 			}
 		}
-		return 1;
+		return (a.length() >= b.length()) ? b.charAt(size-1) - a.charAt(size) : a.charAt(size-1) - b.charAt(size);
 	}
 }

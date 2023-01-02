@@ -24,7 +24,12 @@ class LargestNumberTest {
 	
 	@Test
 	void test02() {
-		assertEquals("9533430",ln.largestNumber(new int[] {3,30,34,5,9}));
+		assertEquals("9534330",ln.largestNumber(new int[] {3,30,34,5,9}));
+	}
+	
+	@Test
+	void test03() {
+		assertEquals("1113111113",ln.largestNumber(new int[] {111311, 1113}));
 	}
 
 }

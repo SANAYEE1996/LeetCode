@@ -8,6 +8,7 @@ public class MinDeletionSize {
         int middleCount = 0;
         for(int i = 0; i < columnLength; i++) {
         	middleCount = 0;
+        	beforeChar = 0;
         	for(int j = 0; j < strs.length; j++) {
         		if(beforeChar > strs[j].charAt(i)) {
         			break;
@@ -15,7 +16,7 @@ public class MinDeletionSize {
         		middleCount++;
         		beforeChar = strs[j].charAt(i);
         	}
-        	if(middleCount == strs.length) {
+        	if(middleCount < strs.length) {
         		answer++;
         	}
         }

@@ -18,12 +18,12 @@ class MinimumRoundsTest {
 	
 	@Test
 	void testCase01() {
-		assertEquals(0,mr.minimumRounds(new int[] {2,2,3,3,2,4,4,4,4,4}));
+		assertEquals(4,mr.minimumRounds(new int[] {2,2,3,3,2,4,4,4,4,4}));
 	}
 	
 	@Test
 	void testCase02() {
-		assertEquals(0,mr.minimumRounds(new int[] {2,3,3}));
+		assertEquals(-1,mr.minimumRounds(new int[] {2,3,3}));
 	}
 	
 	@Test

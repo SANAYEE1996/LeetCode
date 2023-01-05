@@ -19,7 +19,37 @@ class FindMinArrowShotsTest {
 	@Test
 	void test() {
 		int[][] map = {{10,16},{2,8},{1,6},{7,12}};
-		assertEquals(0,fma.findMinArrowShots(map));
+		assertEquals(2,fma.findMinArrowShots(map));
+	}
+	
+	@Test
+	void test02() {
+		int[][] map = {{10,16},{2,8},{1,6},{7,12},{1,4}};
+		assertEquals(2,fma.findMinArrowShots(map));
+	}
+	
+	@Test
+	void test03() {
+		int[][] map = {{1,2},{3,4},{5,6},{7,8}};
+		assertEquals(4,fma.findMinArrowShots(map));
+	}
+	
+	@Test
+	void test04() {
+		int[][] map = {{1,2},{2,3},{3,4},{4,5}};
+		assertEquals(2,fma.findMinArrowShots(map));
+	}
+	
+	@Test
+	void test05() {
+		int[][] map = {{2,8},{2,9},{3,4},{3,5},{4,5},{4,6},{5,6}};
+		assertEquals(2,fma.findMinArrowShots(map));
+	}
+	
+	@Test
+	void test06() {
+		int[][] map = {{2147483646,2147483646},{-2147483646,-2147483646}};
+		assertEquals(2,fma.findMinArrowShots(map));
 	}
 
 }

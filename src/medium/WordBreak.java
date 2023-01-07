@@ -1,60 +1,58 @@
 package medium;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class WordBreak {
+	
+	
 	public boolean wordBreak(String s, List<String> wordDict) {
-		Collections.sort(wordDict);
-		List<Character> firstCharList = new ArrayList<>();
-		putFirstCharacterToList(firstCharList, wordDict);
-		List<Boolean> booleanList = new ArrayList<>();
-		isBreakableWord(wordDict, s, booleanList);
-		if(booleanList.contains(true)) {
-			return true;
+		
+		if (!isStartWithWordDictList(s, wordDict)) {
+			return false;
 		}
-		return false;
+		
+		
+		return true;
     }
 	
-	void putFirstCharacterToList(List<Character> firstCharList, List<String> wordDict) {
-		for(String s : wordDict) {
-			firstCharList.add(s.charAt(0));
-		}
-	}
-	
-	void isBreakableWord(List<String> wordDict, String s, List<Boolean> booleanList) {
-		if(s.equals("")) {
-			booleanList.add(true);
-			return;
-		}
-		int startIndex = 0;
-		String exam = "";
-		for(int i = startIndex; i < wordDict.size(); i++) {
-			exam = wordDict.get(i);
-        	if(s.startsWith(exam)) {
-        		isBreakableWord(wordDict, s.substring(exam.length()), booleanList);
-        	}
-        }
-	}
-	
-	public int getStartIndex(List<Character> firstCharList, char firstcharater) {
-		int mid=0;
-		int min = 0;
-		int max = firstCharList.size()-1;
+	private boolean isStartWithWordDictList(String word, List<String> wordDict) {
 		
-		while(min <= max) {
-			mid = (min + max)/2;
-			if(firstcharater == firstCharList.get(mid)) {
-				return mid;
-			}
-			else if(firstcharater < firstCharList.get(mid)) {
-				max = mid-1;
-				continue;
-			}
-			min = mid+1;
+		if("".equals(word)) {
+			return true;
 		}
 		
-		return mid;
+		for(String str : wordDict) {
+			if(word.startsWith(str)) {
+				if (isStartWithWordDictList(word.substring(str.length()), wordDict)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
+	
+	public static void main(String[] args) {
+		WordBreak s = new WordBreak();
+		List<String> wordDict = new ArrayList<>(Arrays.asList(new String[] {"cats","dog","sand","and","cat"}));
+		System.out.println(s.wordBreak("catsandog", wordDict));
+		wordDict = new ArrayList<>(Arrays.asList(new String[] {"apple","pen"}));
+		System.out.println(s.wordBreak("applepenapple", wordDict));
+		wordDict = new ArrayList<>(Arrays.asList(new String[] {"leet","code"}));
+		System.out.println(s.wordBreak("leetcode", wordDict));
+		
+		String[] strArray = {"abbcbda","cbdaaa","b","dadaaad","dccbbbc","dccadd","ccbdbc","bbca","bacbcdd",
+				 "a","bacb","cbc","adc","c","cbdbcad","cdbab","db","abbcdbd","bcb","bbdab",
+				 "aa","bcadb","bacbcb","ca","dbdabdb","ccd","acbb","bdc","acbccd","d",
+				 "cccdcda","dcbd","cbccacd","ac","cca","aaddc","dccac","ccdc","bbbbcda",
+				 "ba","adbcadb","dca","abd","bdbb","ddadbad","badb","ab","aaaaa","acba","abbb"};
+		wordDict = new ArrayList<>(Arrays.asList(strArray));
+		System.out.println(s.wordBreak("acaaaaabbbdbcccdcdaadcdccacbcccabbbbcdaaaaaadb", wordDict));
+		
+		wordDict = new ArrayList<>(Arrays.asList(new String[] {"cats","dog","sand","cat"}));
+		System.out.println(s.wordBreak("catsanddog", wordDict));
+	}
+	
 }

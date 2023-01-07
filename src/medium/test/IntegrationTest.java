@@ -73,7 +73,6 @@ class IntegrationTest {
 		charList.add('c');
 		charList.add('e');
 		charList.add('g');
-		System.out.println("이진 탐색 : " +wordbreak.getStartIndex(charList, 'f'));
 	}
 	
 	@Test

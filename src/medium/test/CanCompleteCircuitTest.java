@@ -18,8 +18,8 @@ class CanCompleteCircuitTest {
 	
 	@Test
 	void test() {
-		int[] gas;
-		int[] cost;
+		int[] gas = new int[5];
+		int[] cost = new int[5];
 		assertEquals(0,ccc.canCompleteCircuit(gas, cost));
 	}
 

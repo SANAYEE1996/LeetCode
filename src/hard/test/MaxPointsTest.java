@@ -19,7 +19,19 @@ class MaxPointsTest {
 	@Test
 	void test() {
 		int[][] points = {{1,1},{2,2},{3,3}};
-		assertEquals(0,mp.maxPoints(points));
+		assertEquals(3,mp.maxPoints(points));
+	}
+	
+	@Test
+	void test02() {
+		int[][] points = {{1,1},{3,2},{5,3},{4,1},{2,3},{1,4}};
+		assertEquals(4,mp.maxPoints(points));
+	}
+	
+	@Test
+	void test03() {
+		int[][] points = {{1,1},{0,0},{1,-1}};
+		assertEquals(2,mp.maxPoints(points));
 	}
 
 }

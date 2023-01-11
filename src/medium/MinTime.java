@@ -8,11 +8,9 @@ import java.util.List;
 public class MinTime {
 	
 	private int totalCost;
-	private int wayCost;
 	
 	public int minTime(int n, int[][] edges, List<Boolean> hasApple) {
 		totalCost = 0;
-		wayCost = 0;
 		System.out.println("input : " +hasApple);
 		HashMap<Integer, int[]> map = new HashMap<>();
 		for(int[] i : edges) {
@@ -24,28 +22,41 @@ public class MinTime {
 		}
 		if(map.containsKey(0)) {
 			if(map.get(0)[0] != -1) {
-				gogo(map, hasApple, map.get(0)[0]);
+				gogoLeft(map, hasApple, map.get(0)[0], 2);
 			}
 			if(map.get(0)[1] != -1) {
-				gogo(map, hasApple, map.get(0)[1]);
+				gogoLeft(map, hasApple, map.get(0)[1], 2);
 			}
 		}
-		
         return totalCost;
     }
 	
-	private void gogo(HashMap<Integer, int[]> map, List<Boolean> hasApple, int target) {
+	private void gogoLeft(HashMap<Integer, int[]> map, List<Boolean> hasApple, int target, int cost) {
 		if(hasApple.get(target)) {
-			System.out.println("cost : " +wayCost +" .. target : "+target +"  /// " +hasApple.get(target));
-			totalCost += (wayCost+2);
+			System.out.println("left cost :  .. target : "+target +"  /// " +hasApple.get(target));
+			totalCost += cost;
 		}
 		if(map.containsKey(target)) {
-			wayCost += 2;
 			if(map.get(target)[0] != -1) {
-				gogo(map, hasApple, map.get(target)[0]);
+				gogoLeft(map, hasApple, map.get(target)[0], cost+2);
 			}
 			if(map.get(target)[1] != -1) {
-				gogo(map, hasApple, map.get(target)[1]);
+				gogoRight(map, hasApple, map.get(target)[1], 2);
+			}
+		}
+	}
+	
+	private void gogoRight(HashMap<Integer, int[]> map, List<Boolean> hasApple, int target, int cost) {
+		if(hasApple.get(target)) {
+			System.out.println("right cost :  .. target : "+target +"  /// " +hasApple.get(target));
+			totalCost += cost;
+		}
+		if(map.containsKey(target)) {
+			if(map.get(target)[0] != -1) {
+				gogoLeft(map, hasApple, map.get(target)[0], 2);
+			}
+			if(map.get(target)[1] != -1) {
+				gogoRight(map, hasApple, map.get(target)[1], cost+2);
 			}
 		}
 	}

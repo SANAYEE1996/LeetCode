@@ -23,8 +23,12 @@ public class SpiralOrder {
 			answerList.add(map[i][j]);
 			visitedMap[i][j] = true;
 		}
-		if(!visitedMap[i+1][j-1]) {
-			goDown(map,i+1,j-1);
+		try {
+			if(!visitedMap[i+1][j-1]) {
+				goDown(map,i+1,j-1);
+			}
+		}catch(ArrayIndexOutOfBoundsException e) {
+			return;
 		}
 	}
 
@@ -36,8 +40,12 @@ public class SpiralOrder {
 			answerList.add(map[i][j]);
 			visitedMap[i][j] = true;
 		}
-		if(!visitedMap[i-1][j-1]) {
-			goLeft(map,i-1,j-1);
+		try {
+			if(!visitedMap[i-1][j-1]) {
+				goLeft(map,i-1,j-1);
+			}
+		}catch(ArrayIndexOutOfBoundsException e) {
+			return;
 		}
 	}
 
@@ -49,8 +57,12 @@ public class SpiralOrder {
 			answerList.add(map[i][j]);
 			visitedMap[i][j] = true;
 		}
-		if(!visitedMap[i-1][j+1]) {
-			goUp(map,i-1,j+1);
+		try {
+			if(!visitedMap[i-1][j+1]) {
+				goUp(map,i-1,j+1);
+			}
+		}catch(ArrayIndexOutOfBoundsException e) {
+			return;
 		}
 	}
 
@@ -62,8 +74,12 @@ public class SpiralOrder {
 			answerList.add(map[i][j]);
 			visitedMap[i][j] = true;
 		}
-		if(!visitedMap[i+1][j+1]) {
-			goRight(map,i+1,j+1);
+		try {
+			if(!visitedMap[i+1][j+1]) {
+				goRight(map,i+1,j+1);
+			}
+		}catch(ArrayIndexOutOfBoundsException e) {
+			return;
 		}
 	}
 }

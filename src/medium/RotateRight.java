@@ -4,17 +4,16 @@ public class RotateRight {
 	public ListNode rotateRight(ListNode head, int k) {
 		ListNode tail = new ListNode();
 		ListNode tail2 = tail;
-		ListNode head2 = head;
-
+		
 		for(int i = 0; i < k; i++){
-			tail2.val = head2.val;
+			tail2.val = head.val;
 			tail2.next = new ListNode();
 			tail2 = tail2.next;
-			head2 = head2.next;
+			head = head.next;
 		}
-
+		
+		ListNode head2 = head;
 		tail2 = tail;
-		head2 = head;
 
 		while(true){
 			head2 = head2.next;

@@ -6,30 +6,57 @@ import java.util.List;
 public class SpiralOrder {
 	
 	boolean[][] isVisitedMap;
+	List<Integer> answerList;
 	
 	public List<Integer> spiralOrder(int[][] matrix) {
-		List<Integer> answerList = new ArrayList<>();
+		answerList = new ArrayList<>();
 		isVisitedMap = new boolean[matrix.length][matrix[0].length];
 		
 		
 		return answerList;
     }
 	
-	void goRight(int[][] matrix, List<Integer> answerList, int[] coordinates) {
-		int i = coordinates[0];
-		int j = coordinates[1];
-		answerList.add(matrix[i][j]);
-		if(isVisitedMap[i][j+1]) {
-			return;
-		}
-		for(; j < matrix[0].length; j++) {
-			answerList.add(matrix[i][j]);
-			isVisitedMap[i][j] = true;
-			if(j == matrix[0].length-1 || isVisitedMap[i][j+1]) {
+	private void goRight(int[][] map, boolean[][] visitedMap, int i, int j){
+		for(; j < map[i].length; j++){
+			if(visitedMap[i][j]){
 				break;
 			}
+			answerList.add(map[i][j]);
+			visitedMap[i][j] = true;
 		}
-		coordinates[0] = i+1;
-		coordinates[1] = j;
+		goDown(map,visitedMap,i+1,j-1);
+	}
+
+	private void goDown(int[][] map, boolean[][] visitedMap, int i, int j){
+		for(; i < map.length; i++){
+			if(visitedMap[i][j]){
+				break;
+			}
+			answerList.add(map[i][j]);
+			visitedMap[i][j] = true;
+		}
+		goLeft(map,visitedMap,i-1,j-1);
+	}
+
+	private void goLeft(int[][] map, boolean[][] visitedMap, int i, int j){
+		for(; j >= 0; j--){
+			if(visitedMap[i][j]){
+				break;
+			}
+			answerList.add(map[i][j]);
+			visitedMap[i][j] = true;
+		}
+		goUp(map,visitedMap,i-1,j+1);
+	}
+
+	private void goUp(int[][] map, boolean[][] visitedMap, int i, int j){
+		for(; i >= 0; i--){
+			if(visitedMap[i][j]){
+				break;
+			}
+			answerList.add(map[i][j]);
+			visitedMap[i][j] = true;
+		}
+		goRight(map,visitedMap,i+1,j+1);
 	}
 }

@@ -1,50 +1,33 @@
 package medium;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MaxProduct {
 	public int maxProduct(int[] nums) {
 		System.out.println("input : " +Arrays.toString(nums));
-		int sumProductValue = nums[0];
-		int beforeSumProductValue = nums[0];
-		int beforeMinusOrZero = -11;
+		int minusCount = 0;
+		int zeroCount = 0;
+		for(int i : nums) {
+			if(i == 0) {
+				zeroCount++;
+			}
+			if(i < 0) {
+				minusCount++;
+			}
+		}
+		
+		
+		ArrayList<Integer> numList = new ArrayList<>();
+		int value = nums[0];
 		
 		for(int i = 1; i < nums.length; i++) {
-			if(nums[i] > 0) {
-				sumProductValue *= nums[i];
-			}
-			else if(nums[i] == 0) {
-				if(sumProductValue < 0) {
-					beforeSumProductValue = sumProductValue;
-					sumProductValue *= nums[i];
-					beforeMinusOrZero = 1;
-				}
-				else {
-					beforeSumProductValue = sumProductValue;
-					beforeMinusOrZero = 1;
-				}
-			}
-			else {
-				if(sumProductValue < 0) {
-					sumProductValue *= nums[i];
-				}
-				else if(sumProductValue == 0) {
-					beforeSumProductValue = sumProductValue;
-					sumProductValue = 1;
-					beforeMinusOrZero = nums[i];
-				}
-				else {
-					sumProductValue *= nums[i];
-					beforeSumProductValue = sumProductValue;
-					beforeMinusOrZero = nums[i];
-				}
-			}
-		}
-		if (sumProductValue < 0) {
-			sumProductValue = Math.max(sumProductValue/beforeSumProductValue, beforeSumProductValue/beforeMinusOrZero);
+			numList.add(value);
+			
+			value = Math.max(value, Math.max(nums[i], nums[i]*value));
 		}
 		
-		System.out.println("sum Product : " +sumProductValue);
+		System.out.println("sum Product : " +value);
 		
 		return 0;
     }

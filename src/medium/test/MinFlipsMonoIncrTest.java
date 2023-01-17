@@ -18,7 +18,22 @@ class MinFlipsMonoIncrTest {
 	
 	@Test
 	void test() {
-		assertEquals(0,mm.minFlipsMonoIncr("00110"));
+		assertEquals(1,mm.minFlipsMonoIncr("00110"));
+	}
+	
+	@Test
+	void test02() {
+		assertEquals(2,mm.minFlipsMonoIncr("010110"));
+	}
+	
+	@Test
+	void test03() {
+		assertEquals(2,mm.minFlipsMonoIncr("00011000"));
+	}
+	
+	@Test
+	void test04() {
+		assertEquals(5,mm.minFlipsMonoIncr("10011111110010111011"));
 	}
 
 }

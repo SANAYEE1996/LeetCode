@@ -1,7 +1,7 @@
 package medium;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 public class MaxSubarraySumCircular {
 	
@@ -19,14 +19,11 @@ public class MaxSubarraySumCircular {
 		numList.add(sum);
 		int[] extraNums = new int[nums.length*2];
 		copyExtraArray(extraNums, nums);
-		System.out.println("extra Array : " +Arrays.toString(extraNums));
 		minIndex = 0;
 		maxIndex = extraNums.length-1;
 		sum *= 2;
-		System.out.println("numList : " +numList);
 		calculate(numList, extraNums);
-		System.out.println("numList : " +numList);
-        return 0;
+        return Collections.max(numList);
     }
 	
 	private void copyExtraArray(int[] a, int[] b) {
@@ -40,13 +37,12 @@ public class MaxSubarraySumCircular {
 	
 	private void calculate(ArrayList<Integer> numList, int[] extraNums) {
 		int maxLength = extraNums.length/2;
-		while(minIndex <= maxIndex && maxIndex > 0 && minIndex < extraNums.length) {
+		while(minIndex < maxIndex) {
 			if(extraNums[minIndex] < extraNums[maxIndex]) {
 				sum -= extraNums[minIndex];
 				minIndex++;
 				if(maxIndex - minIndex < maxLength) {
 					numList.add(sum);
-					System.out.println(Arrays.toString(Arrays.copyOfRange(extraNums, minIndex-1,  maxIndex)) + " -> "+sum);
 				}
 			}
 			else if(extraNums[minIndex] > extraNums[maxIndex]) {
@@ -54,22 +50,52 @@ public class MaxSubarraySumCircular {
 				maxIndex--;
 				if(maxIndex - minIndex < maxLength) {
 					numList.add(sum);
-					System.out.println(Arrays.toString(Arrays.copyOfRange(extraNums, minIndex,  maxIndex+1)) + " -> "+sum);
 				}
 			}
 			else {
-				int copyMinIndex = minIndex;
-				int copyMaxIndex = maxIndex;
-				int copyMinSum = 0;
-				int copyMaxSum = 0;
-				while(copyMinIndex <= copyMaxIndex) {
-					copyMinIndex++;
-					copyMaxIndex--;
-					if(extraNums[copyMinIndex] != extraNums[copyMaxIndex]) {
-						break;
-					}
-				}
-				break;
+				sameCalculate(numList, extraNums);
+			}
+		}
+	}
+	
+	private void sameCalculate(ArrayList<Integer> numList, int[] extraNums) {
+		int maxLength = extraNums.length/2;
+		int copyMinIndex = minIndex;
+		int copyMaxIndex = maxIndex;
+		while(copyMinIndex < copyMaxIndex && extraNums[copyMinIndex] == extraNums[copyMaxIndex]) {
+			copyMinIndex++;
+			copyMaxIndex--;
+		}
+		int value = 0;
+		if(extraNums[copyMinIndex] < extraNums[copyMaxIndex]) {
+			for(int i = minIndex; i < copyMinIndex+1; i++) {
+				value += extraNums[i];
+			}
+			sum -= value;
+			minIndex = copyMinIndex+1;
+			if(maxIndex - minIndex < maxLength) {
+				numList.add(sum);
+			}
+		}
+		else if(extraNums[copyMinIndex] > extraNums[copyMaxIndex]) {
+			for(int i = maxIndex; i > copyMaxIndex-1; i--) {
+				value += extraNums[i];
+			}
+			sum -= value;
+			maxIndex = copyMaxIndex-1;
+			if(maxIndex - minIndex < maxLength) {
+				numList.add(sum);
+			}
+		}
+		else {
+			int beforeMaxIndex = maxIndex;
+			maxIndex = Math.min(copyMinIndex, copyMaxIndex);
+			for(int i = maxIndex+1; i <= beforeMaxIndex; i++) {
+				value += extraNums[i];
+			}
+			sum -= value;
+			if(maxIndex - minIndex < maxLength) {
+				numList.add(sum);
 			}
 		}
 	}
@@ -79,6 +105,8 @@ public class MaxSubarraySumCircular {
 		System.out.println(s.maxSubarraySumCircular(new int[] {1,3,25,1,23}));
 		System.out.println(s.maxSubarraySumCircular(new int[] {1, -7, 2, -4, -11, 16, -1, 2}));
 		System.out.println(s.maxSubarraySumCircular(new int[] {1,-2,3,-2}));
+		System.out.println(s.maxSubarraySumCircular(new int[] {1,-2,99,-2}));
 		System.out.println(s.maxSubarraySumCircular(new int[] {5,-3,5}));
+		System.out.println(s.maxSubarraySumCircular(new int[] {-3,-2,-3}));
 	}
 }

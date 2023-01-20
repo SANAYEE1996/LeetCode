@@ -88,12 +88,8 @@ public class MaxSubarraySumCircular {
 			}
 		}
 		else {
-			int beforeMaxIndex = maxIndex;
-			maxIndex = Math.min(copyMinIndex, copyMaxIndex);
-			for(int i = maxIndex+1; i <= beforeMaxIndex; i++) {
-				value += extraNums[i];
-			}
-			sum -= value;
+			sum -= extraNums[maxIndex];
+			maxIndex--;
 			if(maxIndex - minIndex < maxLength) {
 				numList.add(sum);
 			}
@@ -108,5 +104,11 @@ public class MaxSubarraySumCircular {
 		System.out.println(s.maxSubarraySumCircular(new int[] {1,-2,99,-2}));
 		System.out.println(s.maxSubarraySumCircular(new int[] {5,-3,5}));
 		System.out.println(s.maxSubarraySumCircular(new int[] {-3,-2,-3}));
+		
+		int[] exam = new int[30000];
+		for(int i = 0; i < exam.length; i++) {
+			exam[i] = 10;
+		}
+		System.out.println(s.maxSubarraySumCircular(exam));
 	}
 }

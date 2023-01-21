@@ -6,9 +6,11 @@ import java.util.List;
 public class RestoreIpAddresses {
 	public List<String> restoreIpAddresses(String s) {
 		List<String> wholeList = new ArrayList<>();
+		String part;
 		for(int i = 1; i <=3; i++) {
 			if(i < s.length()) {
-				if(Integer.parseInt(s.substring(0, i)) <= 255) {
+				part = s.substring(0, i);
+				if(Integer.parseInt(part) <= 255 && !(part.length() > 1 && part.charAt(0) == '0')) {
 					gogo(wholeList, s, i, s.substring(0, i));
 				}
 			}
@@ -34,7 +36,7 @@ public class RestoreIpAddresses {
 				continue;
 			}
 			part = originString.substring(startIndex, startIndex+i);
-			if(Integer.parseInt(part) <= 255) {
+			if(Integer.parseInt(part) <= 255 && !(part.length() > 1 && part.charAt(0) == '0')) {
 				gogo(wholeList, originString, startIndex+i, partString + "." +part);
 			}
 		}
@@ -48,20 +50,11 @@ public class RestoreIpAddresses {
 			}
 		}
 		if(dotCount == 3) {
-			return isRightIpAddress(s);
+			return true;
 		}
 		return false;
 	}
 	
-	private boolean isRightIpAddress(String s) {
-		String[] splitArray = s.split("\\.");
-		for(int i = 0; i < splitArray.length; i++) {
-			if(splitArray[i].length() > 1 && splitArray[i].charAt(0) == '0') {
-				return false;
-			}
-		}
-		return true;
-	}
 	
 	public static void main(String[] args) {
 		RestoreIpAddresses s= new RestoreIpAddresses();

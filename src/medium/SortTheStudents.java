@@ -1,22 +1,31 @@
 package medium;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class SortTheStudents {
 	public int[][] sortTheStudents(int[][] score, int k) {
-        ArrayList<Integer> numList = new ArrayList<>();;
-        
-        for(int i = 0; i <= k; i++) {
-        	for(int j = 0; j < score.length; j++) {
-        		numList.add(score[j][i]);
-        	}
-        	Collections.sort(numList,Collections.reverseOrder());
-        	for(int j = 0; j < score.length; j++) {
-        		score[j][i] = numList.get(j);
-        	}
-        	numList.clear();
+		
+        int[][] sortMap = new int[score.length][2];
+        for(int i = 0; i < score.length; i++) {
+        	sortMap[i][0] = i;
+        	sortMap[i][1] = score[i][k];
         }
-        return score;
+        Arrays.sort(sortMap, new Comparator<int[]>() {
+        	@Override
+        	public int compare(int[] a, int[] b) {
+        		return b[1] - a[1];
+        	}
+        });
+        
+        int[][] answerMap = new int[score.length][score[0].length];
+        
+        for(int i = 0; i < answerMap.length; i++) {
+        	for(int j = 0; j < answerMap[i].length; j++) {
+        		answerMap[i][j] = score[sortMap[i][0]][j];
+        	}
+        }
+        
+        return answerMap;
     }
 }

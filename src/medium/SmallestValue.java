@@ -1,26 +1,37 @@
 package medium;
 
 public class SmallestValue {
+	
+	private int sum;
+	
 	public int smallestValue(int n) {
-		int sum = 0;
-		for(int i = 2; i <= n; i++) {
-			while(n % i == 0) {
-				n /= i;
-				sum += i;
-				System.out.println(n + "  i : " +i);
+		sum = 0;
+		gogo(n);
+		while(true) {
+			if(sum == n) {
+				break;
 			}
+			n = sum;
+			sum = 0;
+			gogo(n);
 		}
-		System.out.println("sum : " +sum);
-        return 0;
+        return sum;
     }
 	
-	public static void main(String[] args) {
-		SmallestValue s = new SmallestValue();
-		System.out.println(s.smallestValue(6));
-		System.out.println(s.smallestValue(2));
-		System.out.println(s.smallestValue(3));
-		System.out.println(s.smallestValue(4));
-		System.out.println(s.smallestValue(5));
-		System.out.println(s.smallestValue(15));
+	private void gogo(int n) {
+		for(int i = 2; i <= Math.sqrt(n); i++) {
+			if(n % i == 0) {
+				while(n % i == 0) {
+					n /= i;
+					sum += i;
+				}
+				gogo(n);
+				return;
+			}
+		}
+		if(n != 1) {
+			sum += n;
+		}
 	}
+	
 }

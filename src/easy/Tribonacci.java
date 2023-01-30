@@ -30,7 +30,7 @@ public class Tribonacci {
 	
 	public static void main(String[] args) {
 		Tribonacci s= new Tribonacci();
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 37; i++) {
 			System.out.println("input : "+i+" and fibo : "+s.tribonacci(i));
 		}
 	}

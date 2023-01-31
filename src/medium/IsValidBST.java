@@ -1,32 +1,29 @@
 package medium;
 
+import java.util.ArrayList;
+
 public class IsValidBST {
 	
-	private boolean isValidBinarySearchTree = true;
+	private ArrayList<Integer> list;
 	
 	public boolean isValidBST(TreeNode root) {
-		isGoGo(root, root.val, root.val);
-		return isValidBinarySearchTree;
+		list = new ArrayList<>();
+		gogo(root);
+		for(int i = 1; i < list.size(); i++) {
+			if(list.get(i-1) > list.get(i)) {
+				return false;
+			}
+		}
+		return true;
     }
 	
-	private void isGoGo(TreeNode root, int max, int min) {
-		if(root.left != null) {
-			if(root.left.val < min) {
-				isGoGo(root.left, Math.max(root.left.val, max), Math.min(root.left.val, min));
-			}
-			else {
-				isValidBinarySearchTree = false;
-				return;
-			}
+	private void gogo(TreeNode root) {
+		if(root == null) {
+			return;
 		}
-		if(root.right != null) {
-			if(root.right.val > max) {
-				isGoGo(root.right, Math.max(root.right.val, max), Math.min(root.right.val, min));
-			}
-			else {
-				isValidBinarySearchTree = false;
-				return;
-			}
-		}
+		gogo(root.left);
+		list.add(root.val);
+		gogo(root.right);
 	}
+	
 }

@@ -2,30 +2,13 @@ package easy;
 
 public class MinCostClimbingStairs {
 	
-	private int minSum;
-	
 	public int minCostClimbingStairs(int[] cost) {
-		minSum = Integer.MAX_VALUE;
-        gogo(cost, -1, 0, 1);
-		return minSum;
+		for(int i=2;i<cost.length;i++){
+            cost[i]+=Math.min(cost[i-1],cost[i-2]);
+        }
+        return Math.min(cost[cost.length-1],cost[cost.length-2]);
     }
 	
-	private void gogo(int[] cost, int startIndex, int sum, int count) {
-		
-		if(startIndex + 1 < cost.length) {
-			gogo(cost, startIndex+1, sum + cost[startIndex + 1], count+1);
-		}
-		else {
-			minSum = (sum < minSum) ? sum : minSum;
-		}
-		
-		if(startIndex + 2 < cost.length) {
-			gogo(cost, startIndex+2, sum + cost[startIndex + 2], count+1);
-		}
-		else {
-			minSum = (sum < minSum) ? sum : minSum;
-		}
-	}
 	
 	public static void main(String[] args) {
 		MinCostClimbingStairs s = new MinCostClimbingStairs();

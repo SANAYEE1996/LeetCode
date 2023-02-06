@@ -1,55 +1,53 @@
 package medium;
 
 public class DecodeString {
+	
+	private int index;
+	private StringBuilder sb;
+	
 	public String decodeString(String s) {
-        
-		String numberString = "";
-		int frequent = 0;
-		for(int i = 0; i < s.length(); i++) {
-			if(Character.isDigit(s.charAt(i))) {
-				numberString = getIntegerFromString(s, i);
-				i += numberString.length();
-				frequent = Integer.parseInt(numberString);
-			}
-			else if(s.charAt(i) == '[') {
-				
-			}
-		}
-		
-		return s;
+		sb = new StringBuilder();
+        gogo(s, 1);
+		return sb.toString();
     }
-	
-	private String getIntegerFromString(String s, int startIndex) {
-		StringBuilder sb = new StringBuilder();
-		for(int i = startIndex; i < s.length(); i++) {
-			if(!Character.isDigit(s.charAt(i))) {
-				break;
+	private void gogo(String s, int frequentNumber){
+		System.out.println("StringBuilder : " +sb.toString());
+		StringBuilder sBuilder = new StringBuilder();
+		for(; index < s.length(); index++){
+			if(Character.isDigit(s.charAt(index))){
+				frequentNumber = getNumberFromString(s);
+				index--;
 			}
-			sb.append(s.charAt(i));
+			else if(s.charAt(index) == '['){
+				index++;
+				gogo(s, frequentNumber);
+			}
+			else if(s.charAt(index) == ']'){
+				attachString(sBuilder.toString(), frequentNumber);
+				frequentNumber = 1;
+				sBuilder.setLength(0);
+			}
+			else{
+				sBuilder.append(s.charAt(index));
+			}
 		}
-		return sb.toString();
 	}
 	
-	private String getRepeatedString(String s, int frequent) {
-		StringBuilder sb = new StringBuilder();
+	private int getNumberFromString(String s) {
+		StringBuilder sbNumber = new StringBuilder();
+		for(; index < s.length(); index++) {
+			if(!Character.isDigit(s.charAt(index))){
+				break;
+			}
+			sbNumber.append(s.charAt(index));
+		}
+		return Integer.parseInt(sbNumber.toString());
+	}
+	
+	private void attachString(String part, int frequent) {
 		for(int i = 0; i < frequent; i++) {
-			sb.append(s);
+			sb.append(part);
 		}
-		return sb.toString();
 	}
 	
-	
-	private String getStringInBucket(String s, int startIndex) {
-		StringBuilder sb = new StringBuilder();
-		for(int i = startIndex; i < s.length(); i++) {
-			if(s.charAt(i) == ']') {
-				break;
-			}
-			else if(s.charAt(i) == '[') {
-				sb.append(getStringInBucket(s, i+1));
-			}
-			sb.append(s.charAt(i));
-		}
-		return sb.toString();
-	}
 }

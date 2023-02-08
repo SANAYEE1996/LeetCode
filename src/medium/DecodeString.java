@@ -1,52 +1,54 @@
 package medium;
 
+import java.util.Stack;
+
 public class DecodeString {
 	
-	private int index;
-	private StringBuilder sb;
 	
 	public String decodeString(String s) {
-		sb = new StringBuilder();
-        gogo(s, 1);
+		StringBuilder sb = new StringBuilder();
+		Stack<Character> stack = new Stack<>();
+		
+		for(int i = 0; i < s.length(); i++) {
+			if(s.charAt(i) == ']') {
+				gogo(stack);
+				continue;
+			}
+			stack.add(s.charAt(i));
+		}
+		
+		while(!stack.empty()) {
+			sb.insert(0, stack.pop());
+		}
+		
 		return sb.toString();
     }
-	private void gogo(String s, int frequentNumber){
-		System.out.println("StringBuilder : " +sb.toString());
-		StringBuilder sBuilder = new StringBuilder();
-		for(; index < s.length(); index++){
-			if(Character.isDigit(s.charAt(index))){
-				frequentNumber = getNumberFromString(s);
-				index--;
-			}
-			else if(s.charAt(index) == '['){
-				index++;
-				gogo(s, frequentNumber);
-			}
-			else if(s.charAt(index) == ']'){
-				attachString(sBuilder.toString(), frequentNumber);
-				frequentNumber = 1;
-				sBuilder.setLength(0);
-			}
-			else{
-				sBuilder.append(s.charAt(index));
-			}
-		}
-	}
 	
-	private int getNumberFromString(String s) {
-		StringBuilder sbNumber = new StringBuilder();
-		for(; index < s.length(); index++) {
-			if(!Character.isDigit(s.charAt(index))){
+	private void gogo(Stack<Character> stack) {
+		StringBuilder partSb = new StringBuilder();
+		while(!stack.empty()) {
+			if(stack.peek() == '[') {
+				stack.pop();
 				break;
 			}
-			sbNumber.append(s.charAt(index));
+			partSb.insert(0, stack.pop());
 		}
-		return Integer.parseInt(sbNumber.toString());
-	}
-	
-	private void attachString(String part, int frequent) {
-		for(int i = 0; i < frequent; i++) {
-			sb.append(part);
+		StringBuilder numberSb = new StringBuilder();
+		while(!stack.empty()) {
+			if(!Character.isDigit(stack.peek())) {
+				break;
+			}
+			numberSb.insert(0, stack.pop());
+		}
+		int frequentNumber = (numberSb.length() == 0) ? 1 : Integer.parseInt(numberSb.toString());
+		StringBuilder ship = new StringBuilder();
+		String part = partSb.toString();
+		for(int i = 0; i < frequentNumber; i++) {
+			ship.append(part);
+		}
+		String attachString = ship.toString();
+		for(int i = 0; i < attachString.length(); i++) {
+			stack.add(attachString.charAt(i));
 		}
 	}
 	

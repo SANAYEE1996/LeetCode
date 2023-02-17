@@ -14,10 +14,7 @@ public class CountFairPairs {
 		int low = 0;
 		int high = array.length-1;
 		int mid = (low+high)/2;
-		int count = 0;
 		while(low < high){
-			if(count > 10) {break;}
-			count++;
 			if(array[mid] == target){
 				break;
 			}

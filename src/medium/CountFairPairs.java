@@ -15,31 +15,31 @@ public class CountFairPairs {
 		int high = array.length-1;
 		int mid = (low+high)/2;
 		int count = 0;
-		while(mid != low || mid != high){
+		while(low < high){
 			if(count > 10) {break;}
 			count++;
 			if(array[mid] == target){
 				break;
 			}
 			else if(array[mid] < target){
-				mid = (mid+high)/2;
-				low = mid;
+				low = mid+1;
+				mid = (low+high)/2;
 			}
 			else{ //target < array[mid]
-				mid = (mid+low)/2;
-				high = mid;
+				high = mid-1;
+				mid = (low+high)/2;
 			}
-			System.out.println("high : " +high);
-			System.out.println("mid : " +mid);
-			System.out.println("low : "+low);
-			System.out.println("====");
 		}
-		System.out.println("mid : " +mid);
+		System.out.println("-----mid : " +mid + " is find ? " +(array[mid] == target));
+		
 	}
 	
 	public static void main(String[] args) {
 		CountFairPairs s = new CountFairPairs();
 		//System.out.println(s.countFairPairs(new int[] {0,1,4,4,5,7}, 3, 6));
-		s.binarySearch(new int[] {0,1,4,4,5,7}, 8);
+		s.binarySearch(new int[] {0,1,4,4,5,7}, 2);
+		s.binarySearch(new int[] {0,1,4,4,5,7}, 3);
+		s.binarySearch(new int[] {0,1,4,4,5,7}, 6);
+		s.binarySearch(new int[] {0,1,4,4,5,7}, 7);
 	}
 }

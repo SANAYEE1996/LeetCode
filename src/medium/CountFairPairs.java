@@ -1,66 +1,64 @@
 package medium;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class CountFairPairs {
 	
 	public long countFairPairs(int[] nums, int lower, int upper) {
-		HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
         Arrays.sort(nums);
-        System.out.println(Arrays.toString(nums));
-        for(int i = 0; i < nums.length; i++) {
-        	if(!map.containsKey(nums[i])) {
-        		map.put(nums[i], new ArrayList<>());
+        int newLower = 0;
+        int newUpper = 0;
+        int lowerIndex = 0;
+        int upperIndex = 0;
+        boolean lowerUnder = false;
+        boolean upperUnder = false;
+        boolean lowerOver = false;
+        boolean upperOver = false;
+        int answer = 0;
+        for(int i = 0; i < nums.length-1; i++) {
+        	newLower = (lower - nums[i]);
+        	newUpper = (upper - nums[i]);
+        	lowerIndex = getBinaryIndex(nums, i, nums.length, newLower);
+        	upperIndex = getBinaryIndex(nums, i, nums.length, newUpper);
+        	if(nums[i+1] >= newLower) {
+        		lowerIndex = i+1;
         	}
-        	map.get(nums[i]).add(i);
-        }
-        int minusLower = 0;
-        int minusUpper = 0;
-        int lowIndex = 0;
-        int upIndex = 0;
-        long answer = 0;
-        long part = 0;
-        for(int key : map.keySet()) {
-        	minusLower = lower - key;
-        	minusUpper = upper - key;
-        	lowIndex = binarySearch(nums, minusLower);
-        	upIndex = binarySearch(nums, minusUpper);
-        	System.out.println("key : " +key);
-        	upIndex = (nums[upIndex] > minusUpper) ? upIndex-1 : upIndex;
-        	lowIndex = (nums[lowIndex] < minusLower) ? lowIndex+1 : lowIndex;
-        	System.out.println("minusLower : " +minusLower + " minusUpper : " +minusUpper);
-        	System.out.println("lowIndex : " +lowIndex + " upIndex : " +upIndex);
-        	part = (long)((long)upIndex - (long)lowIndex + (long)1);
-        	answer += part;
+        	if(nums[nums.length-1] <= newUpper) {
+        		upperIndex = nums.length-1;
+        	}
+        	lowerUnder = newLower < nums[lowerIndex];
+        	upperUnder = newUpper < nums[upperIndex];
+        	lowerOver = newLower > nums[lowerIndex];
+        	upperOver = newUpper > nums[upperIndex];
+        	if((lowerOver && upperOver) || (lowerUnder && upperUnder)) {
+        		continue;
+        	}
+        	answer += ((upperUnder ? upperIndex-1 : upperIndex) - (lowerOver ? lowerIndex+1 : lowerIndex) + 1);
         }
 		return answer;
     }
 	
-	private int binarySearch(int[] array, int target){
-		int low = 0;
-		int high = array.length-1;
-		int mid = (low+high)/2;
-		while(low < high){
-			if(array[mid] == target){
-				break;
-			}
-			else if(array[mid] < target){
-				low = mid+1;
-				mid = (low+high)/2;
-			}
-			else{ //target < array[mid]
-				high = mid-1;
-				mid = (low+high)/2;
+	private int getBinaryIndex(int[] nums, int low, int high, int target){
+		int middle = (low+high)/2;
+		while(low <= high && low < middle && middle < high){
+			if(nums[middle] == target){
+				return middle;
+			}else if(nums[middle] < target){
+				low = middle+1;
+				middle = (low+high)/2;
+			}else{	// target < nums[middle]
+				high = middle-1;
+				middle = (low+high)/2;
 			}
 		}
-		return mid;
+		return middle < 0 ? 0 : middle > nums.length-1 ? nums.length-1 : middle;
 	}
 	
 	public static void main(String[] args) {
 		CountFairPairs s = new CountFairPairs();
 		System.out.println(s.countFairPairs(new int[] {0,1,4,4,5,7}, 3, 6));
-		System.out.println(s.countFairPairs(new int[] {0,1,4,4,5,7}, 2, 6));
+		System.out.println(s.countFairPairs(new int[] {1,7,9,2,5}, 11, 11));
+		System.out.println(s.countFairPairs(new int[] {0,0,0,0,0,0}, 0, 0));
+		System.out.println(s.countFairPairs(new int[] {0,0,0,0,0,0}, -10, 10));
 	}
 }

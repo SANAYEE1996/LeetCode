@@ -1,40 +1,47 @@
 package medium;
 
+import java.util.HashMap;
+
 public class MinOperationsBinary {
 	public int minOperations(int n) {
-		return getCloserValue(n)+1;
+		HashMap<Integer, Integer> map = new HashMap<>();
+		putMap(n, map);
+		return map.get(n);
     }
 	
-	private int getCloserValue(int n){
+	private void putMap(int n, HashMap<Integer, Integer> map){
+		int differBefore = 0;
+		int differAfter = 0;
 		int i = 0;
 		while(true){
-			if( Math.pow(2,i) <= n && n <= Math.pow(2,i+1) ){
+			if(Math.pow(2,i) <= n && n <= Math.pow(2,i+1)){
 				break;
 			}
 			i++;
 		}
-		int min = getOneCountFromBinaryString(Integer.toBinaryString((int) (n-Math.pow(2,i))));
-		min = Math.min(min,getOneCountFromBinaryString(Integer.toBinaryString((int) (Math.pow(2,i+1)-n))));
-		if(Math.pow(2,i)-n < 0) {
-			min = Math.min(min,getOneCountFromBinaryString(toBinaryStringFromMinusInteger((int) (Math.pow(2,i)-n))));
+		differBefore = (int) (n-Math.pow(2,i));
+		differAfter = (int) (Math.pow(2,i+1)-n);
+		if(differBefore == 0 || differAfter == 0){
+			map.put(n,1);
+			return;
 		}
-		if(n-Math.pow(2,i+1) < 0) {
-			min = Math.min(min,getOneCountFromBinaryString(toBinaryStringFromMinusInteger((int) (n-Math.pow(2,i+1)))));
+		if(isTwoPow(differBefore) || isTwoPow(differAfter)){
+			map.put(n,2);
+			return;
 		}
-		return min;
+		putMap(differBefore, map);
+		putMap(differAfter, map);
+		map.put(n, Math.min(map.get(differBefore), map.get(differAfter))+1);
 	}
 	
-	private int getOneCountFromBinaryString(String s){
-		int count = 0;
-		for(int i = 0; i < s.length(); i++){
-			if(s.charAt(i) == '1'){count++;}
+	private boolean isTwoPow(int n){
+		while(n != 0){
+			if(n%2 == 1){
+				return false;
+			}
+			n /= 2;
 		}
-		return count;
-	}
-	
-	private String toBinaryStringFromMinusInteger(int n){
-		String minusBinary = Integer.toBinaryString(n);
-		return minusBinary.substring(minusBinary.length()-Integer.toBinaryString(n*-1).length()-1,minusBinary.length());
+		return true;
 	}
 	
 	public static void main(String[] args) {
@@ -45,5 +52,6 @@ public class MinOperationsBinary {
 		System.out.println(s.minOperations(39));
 		System.out.println(s.minOperations(54));
 		System.out.println(s.minOperations(25));
+		System.out.println(s.minOperations(668));
 	}
 }

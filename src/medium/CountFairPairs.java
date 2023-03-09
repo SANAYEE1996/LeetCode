@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class CountFairPairs {
 	
 	public long countFairPairs(int[] nums, int lower, int upper) {
-		System.out.println("input : " +Arrays.toString(nums));
         Arrays.sort(nums);
         int newLower = 0;
         int newUpper = 0;
@@ -15,11 +14,8 @@ public class CountFairPairs {
         for(int i = 0; i < nums.length-1; i++) {
         	newLower = (lower - nums[i]);
         	newUpper = (upper - nums[i]);
-        	System.out.println("value : "+nums[i]);
         	lowerIndex = getBinaryIndexLower(nums, i+1, nums.length-1, newLower);
         	upperIndex = getBinaryIndexUpper(nums, i+1, nums.length-1, newUpper);
-        	System.out.println("newLower : " +newLower+" and its index : "+lowerIndex);
-        	System.out.println("newUpper : " +newUpper+" and its index : "+upperIndex);
         	if(upperIndex >= lowerIndex) {
         		answer += (long)((long)upperIndex - (long)lowerIndex + 1);
         	}
@@ -60,14 +56,5 @@ public class CountFairPairs {
 			return middle-1;
 		}
 		return middle;
-	}
-	
-	public static void main(String[] args) {
-		CountFairPairs s = new CountFairPairs();
-		int[] exam = {0,1,4,4,5,7};
-		System.out.println(s.countFairPairs(exam, 3, 6));
-		System.out.println(s.countFairPairs(new int[] {1,7,9,2,5}, 11, 11));
-		System.out.println(s.countFairPairs(new int[] {0,0,0,0,0,0}, 0, 0));
-		System.out.println(s.countFairPairs(new int[] {0,0,0,0,0,0}, -10, 10));
 	}
 }

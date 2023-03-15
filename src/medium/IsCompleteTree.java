@@ -10,12 +10,18 @@ public class IsCompleteTree {
         map = new HashMap<>();
         gogo(root, 0);
         ArrayList<Integer> exam;
+        boolean over = false;
         for(int key : map.keySet()){
             exam = new ArrayList<>(map.get(key));
-            System.out.println(exam);
-            for(int i = 0; i < exam.size()-1; i++){
-                if(exam.get(i) == -1 && exam.get(i+1) != -1){
+            if(over) {
+            	return isAllEmptyList(exam);
+            }
+            for(int i = 0; i < exam.size(); i++){
+                if(i < exam.size()-1 && exam.get(i) == -1 && exam.get(i+1) != -1){
                     return false;
+                }
+                if(exam.get(i) == -1) {
+                	over = true;
                 }
             }
         }
@@ -36,5 +42,14 @@ public class IsCompleteTree {
         map.get(level).add(root.val);
         gogo(root.left, level+1);
         gogo(root.right, level+1);
+    }
+    
+    private boolean isAllEmptyList(ArrayList<Integer> exam) {
+    	for(int i : exam) {
+    		if(i != -1) {
+    			return false;
+    		}
+    	}
+    	return true;
     }
 }

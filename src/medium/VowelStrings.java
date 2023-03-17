@@ -20,15 +20,15 @@ public class VowelStrings {
 		System.out.println(Arrays.toString(isVowelString));
 		System.out.println(Arrays.toString(sumList));
 		for(int i = 0; i < queries.length; i++) {
-			answer[i] = sumList[queries[i][1]] - sumList[queries[i][0]] + (isVowelString[queries[i][1]] && isVowelString[queries[i][0]] ? 1 : 0);
+			answer[i] = sumList[queries[i][1]] - sumList[queries[i][0]] -1 + (isVowelString[queries[i][1]] ? 1 : 0) + (isVowelString[queries[i][0]] ? 1 : 0);
 		}
 		return answer;
     }
 	
 	public static void main(String[] args) {
 		VowelStrings s = new VowelStrings();
-		String[] words = {"aba","bcb","ece","aa","e"};
-		int[][] queries = {{0,2},{1,4},{1,1}};
+		String[] words = {"aba","bcb","ece","aa","e","abcd","eee","nnn"};
+		int[][] queries = {{0,2},{1,4},{1,1},{3,6},{4,6},{5,6},{1,3}};
 		System.out.println(Arrays.toString(s.vowelStrings(words, queries)));
 		words = new String[] {"a","e","i"};
 		queries = new int[][] {{0,2},{0,1},{2,2}};

@@ -7,7 +7,7 @@ public class LRUCache {
 	
 	private HashMap<Integer, Integer> map;
 	private HashMap<Integer, Integer> keyIndexMap;
-	public LinkedList<Integer> recentKeyList;
+	private LinkedList<Integer> recentKeyList;
 	private int capacity;
 
 	public LRUCache(int capacity) {

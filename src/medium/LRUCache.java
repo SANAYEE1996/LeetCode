@@ -7,7 +7,7 @@ public class LRUCache {
 	
 	private HashMap<Integer, Integer> map;
 	private HashMap<Integer, Integer> keyIndexMap;
-	private LinkedList<Integer> recentKeyList;
+	public LinkedList<Integer> recentKeyList;
 	private int capacity;
 
 	public LRUCache(int capacity) {
@@ -58,6 +58,9 @@ public class LRUCache {
 	private void lruActive(int key) {
 		int mapKey = recentKeyList.get(0);
 		keyIndexMap.remove(mapKey);
+		for(int keyIndexMapKey : keyIndexMap.keySet()){
+			keyIndexMap.put(keyIndexMapKey, keyIndexMap.get(keyIndexMapKey)-1);
+		}
 		map.remove(mapKey);
 		recentKeyList.remove(0);
 		recentKeyList.add(key);

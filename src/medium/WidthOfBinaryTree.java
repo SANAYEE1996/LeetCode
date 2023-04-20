@@ -5,11 +5,11 @@ import java.util.HashMap;
 
 public class WidthOfBinaryTree {
 	
-	HashMap<Integer, ArrayList<Integer>> map;
+HashMap<Integer, ArrayList<Integer>> map;
 	
 	public int widthOfBinaryTree(TreeNode root) {
         map = new HashMap<>();
-        gogo(root, 0);
+        gogo(root, 0, 0);
         
         int startIndex = 0;
         int endIndex = 0;
@@ -17,36 +17,27 @@ public class WidthOfBinaryTree {
         int max = 0;
         for(int key : map.keySet()){
         	examList = map.get(key);
-        	startIndex = 0;
-        	endIndex = 0;
-        	for(int i= 0; i < examList.size(); i++){
-        		if(examList.get(i) != -500){
-        			startIndex = i;
-        			break;
-        		}
-        	}
-        	for(int i = examList.size()-1; i >= 0; i--){
-        		if(examList.get(i) != -500){
-        			endIndex = i;
-        			break;
-        		}
-        	}
-        	max = Math.max(max, endIndex - startIndex);
+            if(examList.isEmpty()){
+                continue;
+            }
+        	startIndex = examList.get(0);
+        	endIndex = examList.get(examList.size()-1);
+            System.out.println(examList);
+        	max = Math.max(max, endIndex - startIndex+1);
         }
 		return max;
     }
 	
-	private void gogo(TreeNode root, int level) {
+	private void gogo(TreeNode root, int level, int value) {
 		if(!map.containsKey(level)) {
 			map.put(level, new ArrayList<>());
 		}
 		if(root == null) {
-			map.get(level).add(-500);
 			return;
 		}
-		map.get(level).add(root.val);
+		map.get(level).add(value);
 		
-		gogo(root.left, level+1);
-		gogo(root.right, level+1);
+		gogo(root.left, level+1, value*2);
+		gogo(root.right, level+1, value*2 + 1);
 	}
 }

@@ -1,53 +1,26 @@
 package medium;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class IntegerReplacement {
 	
 	public int integerReplacement(int n) {
-		ArrayList<Integer> list = new ArrayList<>();
-		for(int i = 0; i < 31; i++) {
-			list.add((int)Math.pow(2,i));
-		}
-		list.add((int)Math.pow(2,31)-1);
-		System.out.println(list);
-		gogo(list, n);
-		int answer = 0;
-		
-		return answer;
+		ArrayList<Integer> countList = new ArrayList<>();
+		gogo(countList, (long)n, 0);
+		return Collections.min(countList);
 	}
 	
-	private void gogo(ArrayList<Integer> list, int target) {
-		int getIndex = binarySearch(list, target);
-		if(list.get(getIndex) == target) {
-			System.out.println("the answer is : " +getIndex);
+	private void gogo(ArrayList<Integer> countList, long value, int count) {
+		if((long)value == 1) {
+			countList.add(count);
 			return;
 		}
-		System.out.println("target : "+target +"  and its index : " +getIndex);
-	}
-	
-	private int binarySearch(ArrayList<Integer> list, int target) {
-		int low = 0, high = list.size()-1;
-		int middle = (low + high)/2;
-		while(low < high) {
-			if(list.get(middle) == target) {
-				return middle;
-			}
-			if(list.get(middle) < target) {
-				low = middle + 1;
-			}else {
-				high = middle - 1;
-			}
-			middle = (low + high)/2;
+		if((long)value % 2 == 0) {
+			gogo(countList, (long)value/2, count+1);
+			return;
 		}
-		return middle;
-	}
-	
-	public static void main(String[] args) {
-		IntegerReplacement s = new IntegerReplacement();
-		System.out.println(s.integerReplacement(4));
-		System.out.println(s.integerReplacement(513));
-		System.out.println(s.integerReplacement(1024));
-		System.out.println(s.integerReplacement(7));
+		gogo(countList, (long)value+1, count+1);
+		gogo(countList, (long)value-1, count+1);
 	}
 }

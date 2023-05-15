@@ -1,90 +1,41 @@
 package medium;
 
-import java.util.HashMap;
-
 public class IsItPossible {
-	public boolean isItPossible(String word1, String word2) {
-		System.out.println("input word1 : "+word1+ " // input word2 : " +word2);
-        HashMap<Character, Integer> word1Map = new HashMap<>();
-        HashMap<Character, Integer> word2Map = new HashMap<>();
-        putCharToMap(word1Map, word1);
-        putCharToMap(word2Map, word2);
+	
+	/**
+	 * https://leetcode.com/problems/make-number-of-distinct-characters-equal/
+	 * 
+	 * 1 <= word1.length, word2.length <= 105 
+	 * word1 and word2 consist of only lowercase English letters.
+	 * 
+	 * 
+	 * */
+	
+	public boolean isItPossible(String w1, String w2) {
+        int[] m1 = new int[26], m2 = new int[26];
+        int c1 = 0, c2 = 0;
+        for (char c : w1.toCharArray()) if (m1[c-'a']++ == 0) c1++;
+        for (char c : w2.toCharArray()) if (m2[c-'a']++ == 0) c2++;
+
+        if (Math.abs(c1 - c2) > 2) return false; 
         
-        if(word1Map.size() == word2Map.size()) {
-        	System.out.println("차이가 같음");
-        	return true;
+        for (int i = 0; i < 26; i++) {
+            if (m1[i] == 0) continue;
+            int a1 = c1, a2 = c2; 
+            if (m1[i] == 1) a1--;
+            if (m2[i] == 0) a2++;
+            for (int j = 0; j < 26; j++) {
+                if (m2[j] == 0) continue;
+
+                int b1 = a1, b2 = a2;
+                if (i == j) {if (m1[i] == 1) b1++;} 
+                else if (m2[j] == 1) b2--; 
+                
+                if (m1[j] == 0) b1++;
+                if (b1 == b2) return true;
+            }
         }
-        else if(Math.abs(word1Map.size() - word2Map.size()) > 2) {
-        	System.out.println("차이가 2를 초과함");
-        	return false;
-        }
-        else if(Math.abs(word1Map.size() - word2Map.size()) == 2) {
-        	System.out.println("차이가 2일 때");
-        	if(word1Map.size() > word2Map.size()) {
-        		return differTwoCheck(word1Map, word2Map);
-        	}
-        	return differTwoCheck(word2Map, word1Map);
-        }
-        System.out.println("차이가 1일 때");
-        if(word1Map.size() > word2Map.size()) {
-    		return differOneCheck(word1Map, word2Map);
-    	}
-    	return differOneCheck(word2Map, word1Map);
+
+        return false;
     }
-	
-	private void putCharToMap(HashMap<Character, Integer> map, String s) {
-		for(int i = 0; i < s.length(); i++) {
-			if(!map.containsKey(s.charAt(i))) {
-				map.put(s.charAt(i), 0);
-			}
-			map.put(s.charAt(i), map.get(s.charAt(i))+1);
-		}
-	}
-	
-	private boolean differTwoCheck(HashMap<Character, Integer> bigMap, HashMap<Character, Integer> smallMap) {
-		for(Character bigKey : bigMap.keySet()) {
-			if(bigMap.get(bigKey) == 1) {
-				if(!smallMap.containsKey(bigKey)) {
-					for(Character smallKey : smallMap.keySet()) {
-						if(smallMap.get(smallKey) >= 2) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
-	private boolean differOneCheck(HashMap<Character, Integer> bigMap, HashMap<Character, Integer> smallMap) {
-		for(Character bigKey : bigMap.keySet()) {
-			if(bigMap.get(bigKey) >= 2) {
-				if(!smallMap.containsKey(bigKey)) {
-					for(Character smallKey : smallMap.keySet()) {
-						if(smallMap.get(smallKey) >= 2) {
-							return true;
-						}
-					}
-				}
-			}
-			else {
-				if(smallMap.containsKey(bigKey)) {
-					for(Character smallKey : smallMap.keySet()) {
-						if(smallMap.get(smallKey) >= 2) {
-							return true;
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
-	public static void main(String[] args) {
-		IsItPossible s = new IsItPossible();
-		System.out.println(s.isItPossible("ac", "b"));
-		System.out.println(s.isItPossible("abcc", "aab"));
-		System.out.println(s.isItPossible("abcde", "fghij"));
-		System.out.println(s.isItPossible("a", "bb"));
-	}
 }

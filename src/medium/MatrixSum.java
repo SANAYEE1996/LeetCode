@@ -1,9 +1,15 @@
 package medium;
 
+import java.util.Arrays;
+
 public class MatrixSum {
 	public int matrixSum(int[][] nums) {
         int sum = 0;
         int max = 0;
+        
+        for(int[] part : nums){
+            Arrays.sort(part);
+        }
         
         for(int j = 0; j < nums[0].length; j++) {
         	max = 0;

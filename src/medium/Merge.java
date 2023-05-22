@@ -7,7 +7,6 @@ import java.util.Comparator;
 public class Merge {
 	public int[][] merge(int[][] intervals) {
 		twoArraySort(intervals);
-		printArray(intervals);
 		ArrayList<int[]> answerList = new ArrayList<>();
 		answerList.add(new int[] {intervals[0][0], intervals[0][1]});
 		int[] start;
@@ -44,12 +43,6 @@ public class Merge {
 		return answer;
 	}
 	
-	private void printArray(int[][] intervals) {
-		for(int[] i : intervals) {
-			System.out.println(Arrays.toString(i));
-		}
-	}
-	
 	private int getMinValue(int[] a, int[] b) {
 		if(a.length != 2 && b.length != 2) return 0;
 		return getMinValue(a[0],a[1], b[0], b[1]);
@@ -68,25 +61,4 @@ public class Merge {
 		return Math.max(a, Math.max(b, Math.max(c, d)));
 	}
 	
-	
-	public static void main(String[] args) {
-		Merge s = new Merge();
-		int[][] map = {{15,18},{2,6},{8,10},{1,3}};
-		System.out.println(s.merge(map));
-		map = new int[][] {{15,18},{2,6},{2,5},{1,3}};
-		System.out.println(s.merge(map));
-		map = new int[][] {{15,18},{16,24},{2,6},{2,5},{1,3}};
-		System.out.println(s.merge(map));
-		map = new int[][] {{1,1}};
-		System.out.println(s.merge(map));
-		map = new int[][] {{0,0},{0,0},{0,0}};
-		System.out.println(s.merge(map));
-		map = new int[][] {{1,4},{2,3},{0,0}};
-		System.out.println(s.merge(map));
-		map = new int[][] {{2,3},{4,5},{6,7},{8,9},{1,10}};
-		System.out.println(s.merge(map));
-		map = new int[][] {{2,3},{4,5},{11,29},{6,7},{8,9},{1,10}};
-		System.out.println(s.merge(map));
-		
-	}
 }

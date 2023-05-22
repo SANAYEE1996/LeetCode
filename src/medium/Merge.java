@@ -9,26 +9,18 @@ public class Merge {
 		twoArraySort(intervals);
 		printArray(intervals);
 		ArrayList<int[]> answerList = new ArrayList<>();
+		answerList.add(new int[] {intervals[0][0], intervals[0][1]});
 		int[] start;
-		int[] end;
-		for(int i = 0; i < intervals.length; i++) {
-			if(i < intervals.length-1 && !isTwoArrayMix(intervals[i], intervals[i+1])) {
-				answerList.add(intervals[i]);
+		int lastIndex = 0;
+		for(int[] part : intervals) {
+			lastIndex = answerList.size()-1;
+			start = answerList.get(lastIndex);
+			if(start[1] < part[0]) {
+				answerList.add(part.clone());
 				continue;
 			}
-			start = intervals[i];
-			for(; i < intervals.length-1; i++) {
-				if(!isTwoArrayMix(intervals[i], intervals[i+1]) && !isTwoArrayMix(start, intervals[i+1])) {
-					break;
-				}
-			}
-			end = intervals[i];
-			System.out.println("before : " +Arrays.toString(start));
-			System.out.println("after : " +Arrays.toString(end));
-			answerList.add(getMaxMinArray(start, end));
+			answerList.set(lastIndex, new int[] {getMinValue(part,start), getMaxValue(part,start)});
 		}
-		System.out.print("list : ");
-		printArrayList(answerList);
         return getArrayFromList(answerList);
     }
 	
@@ -42,20 +34,6 @@ public class Merge {
 				return a[0] - b[0];
 			}
 		});
-	}
-	
-	private boolean isTwoArrayMix(int[] a, int[] b) {
-		if( (b[0] <= a[0] && a[0] <= b[1]) ||
-			(b[0] <= a[1] && a[1] <= b[1]) ||
-			(a[0] <= b[0] && b[0] <= a[1]) ||
-			(a[0] <= b[1] && b[1] <= a[1]) ){
-			return true;
-		}
-		return false;
-	}
-	
-	private int[] getMaxMinArray(int[] start, int[] end) {
-		return new int[] {Math.min(start[0], end[0]), Math.max(start[1], end[1])};
 	}
 	
 	private int[][] getArrayFromList(ArrayList<int[]> answerList){
@@ -72,11 +50,22 @@ public class Merge {
 		}
 	}
 	
-	private void printArrayList(ArrayList<int[]> originList) {
-		for(int[] i : originList) {
-			System.out.print(Arrays.toString(i) + " ");
-		}
-		System.out.println();
+	private int getMinValue(int[] a, int[] b) {
+		if(a.length != 2 && b.length != 2) return 0;
+		return getMinValue(a[0],a[1], b[0], b[1]);
+	}
+	
+	private int getMinValue(int a, int b, int c, int d) {
+		return Math.min(a, Math.min(b, Math.min(c, d)));
+	}
+	
+	private int getMaxValue(int[] a, int[] b) {
+		if(a.length != 2 && b.length != 2) return 0;
+		return getMaxValue(a[0],a[1], b[0], b[1]);
+	}
+	
+	private int getMaxValue(int a, int b, int c, int d) {
+		return Math.max(a, Math.max(b, Math.max(c, d)));
 	}
 	
 	

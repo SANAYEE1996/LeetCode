@@ -11,28 +11,32 @@ public class RemoveDuplicatesString {
 	 * */
 	
 	public String removeDuplicates(String s, int k) {
-		System.out.println("input : " +s);
-		StringBuilder sb = new StringBuilder();
-		sb.append('!');
-		int dupCount = 1;
+		String snake = "!";
+		int snakeLastIndex = 0;
+		
 		for(int i = 0; i < s.length(); i++){
-			
-			String sbPart = sb.toString();
-			char lastChar = sbPart.charAt(sbPart.length()-1);
-			dupCount = (s.charAt(i) == lastChar) ? (dupCount + 1) : 1;
-			
-			System.out.println("sb : " +sbPart + "  and count : " +dupCount );
-			if(dupCount == k){
-				for(int j = 0; j < k-1; j++){
-					String sbDel = sb.toString();
-					sb.deleteCharAt(sbDel.length() - 1);
-				}
-				dupCount = 1;
+			snakeLastIndex = snake.length()-1;
+			if(snake.charAt(snakeLastIndex) == s.charAt(i) && isSame(snake, k-1, s.charAt(i))){
+				snake = snake.substring(0,snakeLastIndex-k+2);
 				continue;
 			}
-			sb.append(s.charAt(i));
+			snake += String.valueOf(s.charAt(i));
 		}
 		
-		return sb.toString().substring(1);
+		return snake.substring(1);
+	}
+	
+	private boolean isSame(String s, int k, char c){
+		
+		int last = s.length()-1;
+		if(last-k < 0){
+			return false;
+		}
+		for(int i = last; i > last-k; i--){
+			if(s.charAt(i) != c){
+				return false;
+			}
+		}
+		return true;
 	}
 }

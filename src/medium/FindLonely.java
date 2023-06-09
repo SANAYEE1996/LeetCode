@@ -1,7 +1,7 @@
 package medium;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 
 public class FindLonely {
@@ -11,14 +11,24 @@ public class FindLonely {
 	 * */
 	
 	public List<Integer> findLonely(int[] nums) {
+		Arrays.sort(nums);
 		List<Integer> list = new ArrayList<>();
-		HashMap<Integer, Integer> map = new HashMap<>();
-		for(int i : nums) {
-			if(!map.containsKey(i)) map.put(i, 0);
-			map.put(i, map.get(i)+1);
+		if(nums.length == 1) {
+			list.add(nums[0]);
+			return list;
 		}
-		for(int i : nums) {
-			if(map.get(i) == 1 && !map.containsKey(i-1) && !map.containsKey(i+1)) list.add(i);
+		for(int i = 0; i < nums.length; i++) {
+			if(i == 0) {
+				if(nums[i+1] - nums[i] > 1) list.add(nums[i]);
+				continue;
+			}
+			if(i == nums.length-1) {
+				if(nums[i] - nums[i-1] > 1) list.add(nums[i]);
+				continue;
+			}
+			if(nums[i+1] - nums[i] > 1 && nums[i] - nums[i-1] > 1) {
+				list.add(nums[i]);
+			}
 		}
 		return list;
     }

@@ -1,32 +1,33 @@
 package medium;
 
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class SnapshotArray {
-	private int[] map;
-	private ArrayList<int[]> snapList;
-	private int snap_id;
 	
+	/**
+	 * https://leetcode.com/problems/snapshot-array/
+	 * */
+	
+	private int snapId = 0;
+    private TreeMap<Integer, Integer>[] historyRecords;
+    
     public SnapshotArray(int length) {
-        map = new int[length];
-		snap = new ArrayList<>();
-		snap_id = 0;
+        historyRecords = new TreeMap[length];
+        for (int i = 0; i < length; i++) {
+            historyRecords[i] = new TreeMap<Integer, Integer>();
+            historyRecords[i].put(0, 0);
+        }
     }
-    
+
     public void set(int index, int val) {
-        map[index] = val;
+        historyRecords[index].put(snapId, val);
     }
-    
+
     public int snap() {
-        snap_id++;
-		snapList.add(map.clone());
-		return snap_id-1;
+        return snapId++;
     }
-    
-    public int get(int index, int snap_id) {
-        if(snapList.isEmpty() || snapList.size() < snap_id){
-			return 0;
-		}
-		return snapList.get(snap_id)[index];
+
+    public int get(int index, int snapId) {
+        return historyRecords[index].floorEntry(snapId).getValue();
     }
 }

@@ -22,7 +22,7 @@ class MaximalRectangleTest {
 							{'0','1','0','1','1'},
 							{'1','1','1','1','1'},
 							{'1','0','0','1','0'}};
-		assertEquals(4,mr.maximalRectangle(matrix));
+		assertEquals(5,mr.maximalRectangle(matrix));
 	}
 	
 	@Test

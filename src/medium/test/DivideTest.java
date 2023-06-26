@@ -25,5 +25,20 @@ class DivideTest {
 	void testCase02() {
 		assertEquals(2147483647, div.divide(-2147483647, -1));
 	}
+	
+	@Test
+	void testCase03() {
+		assertEquals(3, div.divide(-10, -3));
+	}
+	
+	@Test
+	void testCase04() {
+		assertEquals(2597/17, div.divide(2597, 17));
+	}
+	
+	@Test
+	void testCase05() {
+		assertEquals(2147483647, div.divide(-2147483648, -1));
+	}
 
 }

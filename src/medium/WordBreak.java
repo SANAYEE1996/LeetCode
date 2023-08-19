@@ -1,58 +1,33 @@
 package medium;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class WordBreak {
 	
+	/**
+	 * https://leetcode.com/problems/word-break/
+	 * */
 	
 	public boolean wordBreak(String s, List<String> wordDict) {
-		
-		if (!isStartWithWordDictList(s, wordDict)) {
-			return false;
-		}
-		
-		
-		return true;
+        return helper(s,new HashSet<>(wordDict),new HashMap<String, Boolean>());
     }
 	
-	private boolean isStartWithWordDictList(String word, List<String> wordDict) {
-		
-		if("".equals(word)) {
-			return true;
-		}
-		
-		for(String str : wordDict) {
-			if(word.startsWith(str)) {
-				if (isStartWithWordDictList(word.substring(str.length()), wordDict)) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	public static void main(String[] args) {
-		WordBreak s = new WordBreak();
-		List<String> wordDict = new ArrayList<>(Arrays.asList(new String[] {"cats","dog","sand","and","cat"}));
-		System.out.println(s.wordBreak("catsandog", wordDict));
-		wordDict = new ArrayList<>(Arrays.asList(new String[] {"apple","pen"}));
-		System.out.println(s.wordBreak("applepenapple", wordDict));
-		wordDict = new ArrayList<>(Arrays.asList(new String[] {"leet","code"}));
-		System.out.println(s.wordBreak("leetcode", wordDict));
-		
-		String[] strArray = {"abbcbda","cbdaaa","b","dadaaad","dccbbbc","dccadd","ccbdbc","bbca","bacbcdd",
-				 "a","bacb","cbc","adc","c","cbdbcad","cdbab","db","abbcdbd","bcb","bbdab",
-				 "aa","bcadb","bacbcb","ca","dbdabdb","ccd","acbb","bdc","acbccd","d",
-				 "cccdcda","dcbd","cbccacd","ac","cca","aaddc","dccac","ccdc","bbbbcda",
-				 "ba","adbcadb","dca","abd","bdbb","ddadbad","badb","ab","aaaaa","acba","abbb"};
-		wordDict = new ArrayList<>(Arrays.asList(strArray));
-		System.out.println(s.wordBreak("acaaaaabbbdbcccdcdaadcdccacbcccabbbbcdaaaaaadb", wordDict));
-		
-		wordDict = new ArrayList<>(Arrays.asList(new String[] {"cats","dog","sand","cat"}));
-		System.out.println(s.wordBreak("catsanddog", wordDict));
-	}
-	
+    private boolean helper(String s, HashSet<String>dict,HashMap<String,Boolean>dp){
+        if(s.length()==0)return true;
+        if(dict.contains(s))return true;
+        
+        if(dp.containsKey(s))return dp.get(s);
+        
+        for(int i=1;i<s.length();i++){
+            String subs = s.substring(0,i);
+            if(dict.contains(subs)&&helper(s.substring(i),dict,dp)){
+                dp.put(subs,true);
+                return true;
+            }
+        }
+        dp.put(s,false);
+        return false;
+    }
 }

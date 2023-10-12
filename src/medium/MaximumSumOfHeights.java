@@ -11,7 +11,6 @@ public class MaximumSumOfHeights {
 	 * */
 	
 	public long maximumSumOfHeights(List<Integer> maxHeights) {
-		System.out.println("input list : " +maxHeights);
 		List<Integer> findMaxList = new ArrayList<>(maxHeights);
 		int maxHeight = Collections.max(findMaxList);
 		List<Integer> maxIndexList = new ArrayList<>();
@@ -31,14 +30,12 @@ public class MaximumSumOfHeights {
 		long sum = lastMax;
 		for(int i = index+1; i < list.size(); i++){
 			sum = (lastMax >= list.get(i)) ? sum + list.get(i) : sum + lastMax;
-			lastMax = list.get(i);
+			lastMax = Math.min(list.get(i), lastMax);
 		}
-		System.out.println("right sum : " +(sum-list.get(index)));
 		lastMax = list.get(index);
-		System.out.println("lastMax : " +lastMax);
 		for(int i = index-1; i >= 0; i--){
 			sum = (lastMax >= list.get(i)) ? sum + list.get(i) : sum + lastMax;
-			lastMax = list.get(i);
+			lastMax = Math.min(list.get(i), lastMax);
 		}
 		return sum;
 	}

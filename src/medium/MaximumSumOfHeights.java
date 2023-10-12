@@ -1,7 +1,5 @@
 package medium;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MaximumSumOfHeights {
@@ -11,15 +9,8 @@ public class MaximumSumOfHeights {
 	 * */
 	
 	public long maximumSumOfHeights(List<Integer> maxHeights) {
-		List<Integer> findMaxList = new ArrayList<>(maxHeights);
-		int maxHeight = Collections.max(findMaxList);
-		List<Integer> maxIndexList = new ArrayList<>();
-		for(int i = 0; i < maxHeights.size(); i++){
-			if(maxHeights.get(i) < maxHeight) continue;
-			maxIndexList.add(i);
-		}
 		long answer = 0;
-		for(int i : maxIndexList){
+		for(int i = 0; i < maxHeights.size(); i++){
 			answer = Math.max(getMaxSum(maxHeights, i), answer);
 		}
 		return answer;

@@ -15,16 +15,6 @@ class MinOperationsForArrayTest {
 	void init() {
 		mofa = new MinOperationsForArray();
 	}
-
-	@Test
-	void minCountTest() {
-		assertEquals(1, mofa.getMinCount(2));
-		assertEquals(1, mofa.getMinCount(3));
-		assertEquals(2, mofa.getMinCount(4));
-		assertEquals(2, mofa.getMinCount(5));
-		assertEquals(2, mofa.getMinCount(6));
-		assertEquals(3, mofa.getMinCount(7));
-	}
 	
 	@Test
 	void test01() {

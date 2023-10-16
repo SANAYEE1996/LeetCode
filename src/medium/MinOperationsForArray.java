@@ -25,9 +25,9 @@ public class MinOperationsForArray {
 		return answer;
 	}
 
-	public int getMinCount(int value){
+	private int getMinCount(int value){
 		if(value % 3 == 0) return value/3;
 		else if(value % 3 == 2) return value/3 + 1;
-		return ((value-(value/3-1)*3)/2 + (value/3-1)*3);
+		return ((value-(value/3-1)*3)/2 + (value/3-1));
 	}
 }

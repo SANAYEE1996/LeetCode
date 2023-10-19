@@ -33,5 +33,14 @@ class ConstructProductMatrixTest {
 			System.out.println(Arrays.toString(i));
 		}
 	}
+	
+	@Test
+	void test03() {
+		int[][] grid = {{4,3,9},{3,9,10},{9,7,8},{8,4,7},{6,1,3}};
+		int[][] result = cpm.constructProductMatrix(grid);
+		for(int[] i : result) {
+			System.out.println(Arrays.toString(i));
+		}
+	}
 
 }

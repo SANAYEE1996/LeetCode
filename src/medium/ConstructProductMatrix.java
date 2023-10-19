@@ -14,16 +14,16 @@ public class ConstructProductMatrix {
 		long totalSum = 1;
 		for(int[] i : grid){
 			for(int j : i){
-				totalSum = ((totalSum%12345)*(j%12345))%12345;
+				totalSum *= j;
 				numList.add(j);
 			}
 		}
-		
 		int[][] answer = new int[grid.length][grid[0].length];
-		
+		int index = 0;
 		for(int i = 0; i < answer.length; i++){
 			for(int j = 0; j < answer[i].length; j++){
-				answer[i][j] = (int)totalSum/numList.get(i*answer.length + j);
+				answer[i][j] = (int)((totalSum/(long)numList.get(index))%12345);
+				index++;
 			}
 		}
 		

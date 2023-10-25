@@ -30,5 +30,10 @@ class KthGrammarTest {
 	void test03() {
 		assertEquals(1, kg.kthGrammar(2, 2));
 	}
+	
+	@Test
+	void test04() {
+		assertEquals(1, kg.kthGrammar(30, 500000));
+	}
 
 }

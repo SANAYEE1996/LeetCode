@@ -1,8 +1,5 @@
 package medium;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class KthGrammar {
 	
 	/**
@@ -10,21 +7,26 @@ public class KthGrammar {
 	 * */
 	
 	public int kthGrammar(int n, int k) {
-		List<String> list = new ArrayList<>();
-		list.add("0");
-		for(int i = 0; i < n-1; i++){
-			makeString(list);
+		if(n == 1) return 0;
+		int min = 1, max = (int) Math.pow(2, n-1);
+		int middle = max/2;
+		int now = 0;
+		while(max - min > 1){
+			if(min <= k && k <= middle){
+				now = (now == 0) ? 0 : 1;
+				max = middle;
+				middle = (max - min+1)/2 + min - 1;
+			}
+			else if(middle < k && k <= max){
+				now = (now == 0) ? 1 : 0;
+				min = middle+1;
+				middle = (max-min+1)/2 + min - 1;
+			}
 		}
-		return Integer.parseInt(list.get(n-1).substring(k-1, k));
-	}
-
-	private void makeString(List<String> list){
-		String lastWord = list.get(list.size()-1);
-		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < lastWord.length(); i++){
-			sb.append(lastWord.charAt(i) == '0' ? "01" : "10");
+		if(now == 0){
+			return (min == k) ? 0 : 1;
 		}
-		list.add(sb.toString());
+		return (min == k) ? 1 : 0;
 	}
 
 }

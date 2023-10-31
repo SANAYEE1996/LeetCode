@@ -24,7 +24,7 @@ class MinOperationsListTest {
 		int[] nums = {3,1,6,8};
 		int[] queriess = {1,5};
 		List<Long> expected = Arrays.asList(14L, 10L);
-		assertEquals(mol.minOperations(nums, queriess), expected);
+		assertEquals(expected, mol.minOperations(nums, queriess));
 	}
 	
 	@Test
@@ -32,7 +32,7 @@ class MinOperationsListTest {
 		int[] nums = {2,9,6,3};
 		int[] queriess = {10};
 		List<Long> expected = Arrays.asList(20L);
-		assertEquals(mol.minOperations(nums, queriess), expected);
+		assertEquals(expected, mol.minOperations(nums, queriess));
 	}
 
 }

@@ -6,6 +6,10 @@ import java.util.PriorityQueue;
 
 public class FoodRatings {
 	
+	/**
+	 * https://leetcode.com/problems/design-a-food-rating-system/submissions/
+	 * */
+	
 	private Map<String, Integer> foodRatingMap;
     private Map<String, String> foodCuisineMap;
     private Map<String, PriorityQueue<Food>> cuisineFoodMap;
